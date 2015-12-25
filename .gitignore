@@ -28,12 +28,8 @@
 *.out
 *.app
 
-AP-Team-Project.xcodeproj/project.xcworkspace/contents.xcworkspacedata
-
+# Xcode
 *.xccheckout
-
 *.xcuserstate
-
 *.xcscheme
-
 *.plist
