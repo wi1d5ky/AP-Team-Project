@@ -33,3 +33,7 @@
 *.xcuserstate
 *.xcscheme
 *.plist
+
+*.xcbkptlist
+
+*.xcworkspacedata
