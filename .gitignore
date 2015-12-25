@@ -27,3 +27,13 @@
 *.exe
 *.out
 *.app
+
+# Xcode
+*.xccheckout
+*.xcuserstate
+*.xcscheme
+*.plist
+
+*.xcbkptlist
+
+*.xcworkspacedata
