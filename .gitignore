@@ -27,3 +27,13 @@
 *.exe
 *.out
 *.app
+
+AP-Team-Project.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+
+*.xccheckout
+
+*.xcuserstate
+
+*.xcscheme
+
+*.plist
