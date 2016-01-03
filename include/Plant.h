@@ -7,16 +7,19 @@ class Plant
 {
     public:
         Plant()=default;
-        Plant(int spend):spend_(spend){}
+        Plant(int cost):cost_(cost){}
         virtual ~Plant();
 
-        std::string getName() {/* NOT IMPLEMENT */};
-        int getHP() {/* NOT IMPLEMENT */};
-        void gotHurt(int hurt) {/* NOT IMPLEMENT */};
+        std::string getName() {return Name_;};
+        int getHP() {return HP_;};
+        void gotHurt(int hurt) {HP_-=hurt;};
 
     protected:
     private:
-        int spend_; // SUGGEST TO CHANGE TO COST
+        int cost_;
+        std::string Name_;
+        int HP_;
+        int full_HP_; // SUGGEST TO CHANGE TO COST
 
         /* NEED: Name, HP, full_HP */
 };
@@ -24,10 +27,15 @@ class CoinPlant:public Plant
 {
 public:
     CoinPlant()=default;
-    CoinPlant(int spend, int getmoney):Plant(spend), getmoney_(getmoney){}
+    CoinPlant(int cost, int getmoney):Plant(cost), getmoney_(getmoney){}
 private:
     int getmoney_;
 
+};
+class BombPlant:public Plant
+{
+public:
+    BombPlant()=default;
 };
 
 #endif // PLANT_H
