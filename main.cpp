@@ -1,9 +1,9 @@
 #include <iostream>
 
-using namespace std ;
+using namespace std;
 
 int main( int argc , char* argv[] )
 {
-    cout << "Hello, yo,yooooooo" << endl ;
-    return 0 ;
+	cout << "Hello, world." << endl ;
+	return 0 ;
 }

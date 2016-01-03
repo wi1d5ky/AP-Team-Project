@@ -35,5 +35,8 @@
 *.plist
 
 *.xcbkptlist
-
 *.xcworkspacedata
+
+
+bin/
+*.depend
