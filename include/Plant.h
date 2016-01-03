@@ -21,5 +21,9 @@ private:
     int getmoney_;
 
 };
+class BombPlant:public Plant
+{
+    public
+};
 
 #endif // PLANT_H
