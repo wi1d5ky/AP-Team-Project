@@ -5,12 +5,13 @@
 class Player
 {
 	public:
-		Player();
-		virtual ~Player();
+		int currentMoney() { return money_; };
 
 	protected:
 
 	private:
+		int money_ = default_money;
+		constexpr static int default_money = 150;
 };
 
 #endif // PLAYER_H
