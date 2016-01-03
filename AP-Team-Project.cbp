@@ -33,9 +33,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="include/Land.h" />
+		<Unit filename="include/Map.h" />
 		<Unit filename="include/Plant.h" />
+		<Unit filename="include/Player.h" />
+		<Unit filename="include/Zombie.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Land.cpp" />
+		<Unit filename="src/Map.cpp" />
 		<Unit filename="src/Plant.cpp" />
+		<Unit filename="src/Player.cpp" />
+		<Unit filename="src/Zombie.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
