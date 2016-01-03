@@ -8,11 +8,9 @@ class Land
 {
 	public:
 		constexpr static int max_num = 10;
-		std::string getPlantName() { return plant_ == nullptr ? "Empty" : plant_->getName(); };
+		const std::string getPlantName() const { return plant_ == nullptr? "Empty" : plant_->getName(); };
 		bool isStand() { return sbIsHere; };
-
 		bool standHere();
-
 	protected:
 
 	private:

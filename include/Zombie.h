@@ -6,6 +6,7 @@
 class Zombie
 {
 	public:
+		constexpr static int max_num = 10;
 		int getHP() { return HP_; };
 		int attack() { return power_; };
 
