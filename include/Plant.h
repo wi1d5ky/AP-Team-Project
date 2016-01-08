@@ -15,27 +15,33 @@ class Plant
         void gotHurt(int hurt) {HP_-=hurt;};
 
     protected:
-    private:
         int cost_;
         std::string Name_;
         int HP_;
-        int full_HP_; // SUGGEST TO CHANGE TO COST
-
-        /* NEED: Name, HP, full_HP */
+        int full_HP_;
 };
 class CoinPlant:public Plant
 {
 public:
     CoinPlant()=default;
-    CoinPlant(int cost, int getmoney):Plant(cost), getmoney_(getmoney){}
 private:
     int getmoney_;
+    int visited_;
 
 };
 class BombPlant:public Plant
 {
 public:
     BombPlant()=default;
+private:
+    int damage_;
+};
+class HealPlant:public Plant
+{
+public:
+    HealPlant();
+private:
+    int heal_;
 };
 
 #endif // PLANT_H
