@@ -26,7 +26,7 @@ public:
     CoinPlant()=default;
 private:
     int getmoney_;
-    int round_;
+    int visited_;
 
 };
 class BombPlant:public Plant
