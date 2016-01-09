@@ -10,38 +10,52 @@ class Plant
         Plant(int cost):cost_(cost){}
         virtual ~Plant();
 
+		std::string getType() {return type_;};
+		int spend() {return cost_;};
         std::string getName() {return Name_;};
+        int getFullHP() {return full_HP_;};
         int getHP() {return HP_;};
         void gotHurt(int hurt) {HP_-=hurt;};
+        std::string effect() {return effect_;};
 
     protected:
+
+		const std::string type_ = "Plant";
         int cost_;
         std::string Name_;
         int HP_;
         int full_HP_;
+        const std::string effect_ = "this is a plant";
 };
+
 class CoinPlant:public Plant
 {
-public:
-    CoinPlant()=default;
-private:
-    int getmoney_;
-    int visited_;
-
+	public:
+		CoinPlant()=default;
+	private:
+		const std::string type_ = "CoinPlant";
+		const static int happendRound_ = 2;
+		int getmoney_ = 100;
+		int visited_;
+        const std::string effect_ = "gives $" + std::to_string(getmoney_) + "every " + std::to_string(happendRound_) + " rounds";
 };
+
 class BombPlant:public Plant
 {
-public:
-    BombPlant()=default;
-private:
-    int damage_;
+	public:
+		BombPlant()=default;
+	private:
+		const std::string type_ = "BombPlant";
+		int damage_;
 };
+
 class HealPlant:public Plant
 {
-public:
-    HealPlant();
-private:
-    int heal_;
+	public:
+		HealPlant()=default;
+	private:
+		const std::string type_ = "HealPlant";
+		int heal_;
 };
 
 #endif // PLANT_H
