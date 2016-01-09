@@ -21,6 +21,15 @@ std::vector<std::string> Player::store()
 	return menu;
 }
 
+bool Player::canBuy()
+{
+    for(int i = 0 ; i < plant_num_ ; ++i)
+		if(choice_[i]->spend() <= money_)
+			return true;
+	return false;
+}
+
+#include<iostream>
 
 Plant Player::buy(int i)
 {

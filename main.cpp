@@ -83,7 +83,7 @@ int main()
 	*/
 	///////////////////////////////////////////////////////////
 
-	// /*
+	/*
 	cout << "////// Zombie Position /////" << endl;
 	for(int i = 0 ; i < zombie_num ; ++i)
 		cout << "[" + to_string(i) +"] " << zombies[i]->position() << endl;
@@ -96,6 +96,21 @@ int main()
 
 	for(int i = 0 ; i < zombie_num ; ++i)
 		cout << "[" + to_string(i) +"] " << zombies[i]->position() << endl;
+	*/
+
+	///////////////////////////
+
+	/*
+
+	cout << player.currentMoney() << endl;
+	cout << (player.canBuy() ? "Can Buy!" : "Can't Buy") << endl;
+
+	Plant first_plant = player.buy(1);
+
+	cout << player.currentMoney() << endl;
+	cout << (player.canBuy() ? "Can Buy!" : "Can't Buy") << endl;
+
+	*/
 
 	return 0;
 }

@@ -21,7 +21,7 @@ class Plant
     protected:
 
 		const std::string type_ = "Plant";
-        int cost_;
+        int cost_ = 100;
         std::string Name_ = "Plant Name";
         int HP_;
         int full_HP_;

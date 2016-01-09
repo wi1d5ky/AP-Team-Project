@@ -11,6 +11,7 @@ class Player
 		int currentMoney() { return money_; };
 
 		std::vector<std::string> store();
+		bool canBuy();
 		Plant buy(int i);
 
 	protected:
