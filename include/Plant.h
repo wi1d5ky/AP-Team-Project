@@ -22,10 +22,18 @@ class Plant
 
 		const std::string type_ = "Plant";
         int cost_;
-        std::string Name_;
+        std::string Name_ = "Plant Name";
         int HP_;
         int full_HP_;
         const std::string effect_ = "this is a plant";
+};
+
+class nilPlant:public Plant
+{
+	public:
+		bool isNull() { return isNull_; };
+	private:
+		const bool isNull_ = true;
 };
 
 class CoinPlant:public Plant

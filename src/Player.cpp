@@ -22,8 +22,11 @@ std::vector<std::string> Player::store()
 }
 
 
-Plant Player::choose(int i)
+Plant Player::buy(int i)
 {
+	if(money_ - choice_[i]->spend() < 0)
+		return *(new nilPlant);
+	money_ -= choice_[i]->spend();
 	return *choice_[i];
 }
 

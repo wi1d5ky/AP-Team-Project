@@ -10,13 +10,13 @@ class Land
 	public:
 		constexpr static int max_num = 10;
 		const std::string getPlantName() const { return plant_ == nullptr? "Empty" : plant_->getName(); };
-		bool isStand() { return sbIsHere; };
-		bool standHere();
+		bool isStood() { return isStood_; };
+		void put(Plant & plant);
 	protected:
 
 	private:
 		Plant * plant_ = nullptr;
-		bool sbIsHere = false;
+		bool isStood_ = false;
 };
 
 #endif // LAND_H
@@ -32,7 +32,9 @@ class Map
 		// with this constructor, you could get a map with [land_num] empty land
 		Map(int land_num);
 
-		const std::string land(int i) const {return lands_[0].getPlantName();};
+		bool put(Plant & plant, int position);
+
+		const std::string land(int i) const {return lands_[i].getPlantName();};
 		int size() { return lands_.size(); }
 
 	protected:
