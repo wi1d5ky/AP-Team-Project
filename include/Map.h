@@ -10,8 +10,7 @@ class Land
 	public:
 		constexpr static int max_num = 10;
 		const std::string getPlantName() const { return plant_ == nullptr? "Empty" : plant_->getName(); };
-		bool isStood() { return isStood_; };
-		void put(Plant & plant);
+		bool put(Plant & plant);
 	protected:
 
 	private:

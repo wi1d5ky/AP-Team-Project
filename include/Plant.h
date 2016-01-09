@@ -40,6 +40,7 @@ class CoinPlant:public Plant
 {
 	public:
 		CoinPlant()=default;
+		bool isNull() {return false;};
 	private:
 		const std::string type_ = "CoinPlant";
 		const static int happendRound_ = 2;
@@ -52,6 +53,7 @@ class BombPlant:public Plant
 {
 	public:
 		BombPlant()=default;
+		bool isNull() {return false;};
 	private:
 		const std::string type_ = "BombPlant";
 		int damage_;
@@ -61,6 +63,7 @@ class HealPlant:public Plant
 {
 	public:
 		HealPlant()=default;
+		bool isNull() {return false;};
 	private:
 		const std::string type_ = "HealPlant";
 		int heal_;

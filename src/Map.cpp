@@ -1,11 +1,14 @@
 #include "Map.h"
 #include<assert.h>
 
-
-void Land::put(Plant & plant)
+bool Land::put(Plant & plant)
 {
+	if(isStood_)
+		 return false;
+
 	plant_ = &plant;
 	isStood_ = true;
+	return true;
 }
 
 Map::Map(int land_num)
@@ -21,9 +24,5 @@ Map::Map(int land_num)
 
 bool Map::put(Plant & plant, int position)
 {
-	if(lands_[position].isStood())
-		return false;
-
-	lands_[position].put(plant);
-	return true;
+	return lands_[position].put(plant);
 }
