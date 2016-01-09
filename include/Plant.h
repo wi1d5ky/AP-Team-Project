@@ -57,6 +57,7 @@ class BombPlant:public Plant
 	private:
 		const std::string type_ = "BombPlant";
 		int damage_;
+		const std::string effect_ ="gives " + std::to_string(damage_) + " damage points";
 };
 
 class HealPlant:public Plant
@@ -67,6 +68,18 @@ class HealPlant:public Plant
 	private:
 		const std::string type_ = "HealPlant";
 		int heal_;
+		const std::string effect_= "gives all your plants " + std::to_string(heal_) + " Hp back";
 };
 
+class ShotPlant:public Plant
+{
+public:
+    ShotPlant()=default;
+    bool isNull() {return false;};
+private:
+    const std::string type_ = "ShotPlant";
+    int damage_;
+    const std::string effect_ = "gives " + std::to_string(damage_) + " damage points"
+
+};
 #endif // PLANT_H
