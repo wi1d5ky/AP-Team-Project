@@ -52,7 +52,6 @@ int main()
 	Player player;
 	vector<string> menu = player.store();
 
-	/*
 	cout << "Player has $" << player.currentMoney() << endl;
 	cout << "There are " << game_map->size() <<  " planet(s) on the map:" << endl;
 
@@ -62,6 +61,7 @@ int main()
 	for(unsigned int i = 0 ; i < menu.size() ; ++i)
 		cout << "[" + to_string(i) + "] " + menu[i] << endl;
 
+	/*
 	///////////////////////////////////////////////////////////
 
 	int stand = 7;
