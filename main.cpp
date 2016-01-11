@@ -21,10 +21,8 @@ int main()
     
     Game game(8,3);
     
-
+    game.InitPlants();
     game.DisplayOfPlant();
-    
-    
     
     
     int land_num = 8;

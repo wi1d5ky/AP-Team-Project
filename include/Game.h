@@ -17,7 +17,7 @@ public:
     
     
 private:
-    static std::vector<Plant> plantTypes_;
+    static std::vector<Plant*> plantTypes_;
     
     int numOfLand_ = 8;
     int numOfZombie_ = 3;
