@@ -10,32 +10,78 @@ class Plant
         Plant(int cost):cost_(cost){}
         virtual ~Plant();
 
+
+		int cost() {return cost_;};
         std::string getName() {return Name_;};
+        int getFullHP() {return full_HP_;};
         int getHP() {return HP_;};
         void gotHurt(int hurt) {HP_-=hurt;};
+        virtual std::string display() {return "Plant";}
+
 
     protected:
-    private:
-        int cost_;
-        std::string Name_;
+        int cost_ ;
+        std::string Name_ ;
         int HP_;
-        int full_HP_; // SUGGEST TO CHANGE TO COST
+        constexpr static int full_HP_ = 75;
 
-        /* NEED: Name, HP, full_HP */
 };
+
+class nilPlant:public Plant
+{
+	public:
+		bool isNull() { return isNull_; };
+	private:
+		const bool isNull_ = true;
+};
+
 class CoinPlant:public Plant
 {
-public:
-    CoinPlant()=default;
-    CoinPlant(int cost, int getmoney):Plant(cost), getmoney_(getmoney){}
-private:
-    int getmoney_;
-
+	public:
+		CoinPlant()=default;
+		bool isNull() {return false;};
+		virtual std::string display() {return "CoinPlant gives $" + std::to_string(getmoney_) + " every " + std::to_string(happendRound_) + " rounds";}
+		//void Do(Game);
+		//void Attacked(Game);
+	private:
+		const static int happendRound_ = 2;
+		int getmoney_ ;
+		int visited_;
 };
+
 class BombPlant:public Plant
 {
-public:
-    BombPlant()=default;
+	public:
+		BombPlant()=default;
+		bool isNull() {return false;};
+		virtual std::string display() {return "BombPlant gives " + std::to_string(damage_) + " damage points";}
+		//void Attacked(Game);
+	private:
+		int damage_;
 };
 
+class HealPlant:public Plant
+{
+	public:
+		HealPlant()=default;
+		bool isNull() {return false;};
+		virtual std::string display() {return "HealPlant gives all your plants " + std::to_string(heal_) + " Hp back";}
+		//void Do(Game);
+		//void Attacked(Game);
+	private:
+		int heal_;
+};
+
+class ShotPlant:public Plant
+{
+	public:
+		ShotPlant()=default;
+		bool isNull() {return false;};
+		virtual std::string display() {return "ShotPlant gives " + std::to_string(damage_) + " damage points";}
+
+		//void Attacked(Game);
+	private:
+		int damage_;
+
+};
 #endif // PLANT_H
