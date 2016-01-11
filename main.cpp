@@ -29,7 +29,7 @@ int main()
 
     ///////////////////////////////////////////////////////////
 
-	int zombie_num = 3;
+	constexpr int zombie_num = 3;
     Zombie * zombies[zombie_num] = {};
     // Should set position
     zombies[0] = new Zombie(4);

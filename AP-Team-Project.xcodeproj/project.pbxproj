@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		942591C91C442664002917DD /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 942591C41C442664002917DD /* Game.cpp */; };
+		942591CA1C442664002917DD /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 942591C51C442664002917DD /* Map.cpp */; };
+		942591CB1C442664002917DD /* Plant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 942591C61C442664002917DD /* Plant.cpp */; };
+		942591CC1C442664002917DD /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 942591C71C442664002917DD /* Player.cpp */; };
+		942591CD1C442664002917DD /* Zombie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 942591C81C442664002917DD /* Zombie.cpp */; };
 		94FE01F81C2CF4D2001922D1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94FE01F71C2CF4D2001922D1 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +28,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		942591BF1C442653002917DD /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = include/Game.h; sourceTree = "<group>"; };
+		942591C01C442653002917DD /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Map.h; path = include/Map.h; sourceTree = "<group>"; };
+		942591C11C442653002917DD /* Plant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Plant.h; path = include/Plant.h; sourceTree = "<group>"; };
+		942591C21C442653002917DD /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = include/Player.h; sourceTree = "<group>"; };
+		942591C31C442653002917DD /* Zombie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Zombie.h; path = include/Zombie.h; sourceTree = "<group>"; };
+		942591C41C442664002917DD /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = src/Game.cpp; sourceTree = "<group>"; };
+		942591C51C442664002917DD /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Map.cpp; path = src/Map.cpp; sourceTree = "<group>"; };
+		942591C61C442664002917DD /* Plant.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Plant.cpp; path = src/Plant.cpp; sourceTree = "<group>"; };
+		942591C71C442664002917DD /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = src/Player.cpp; sourceTree = "<group>"; };
+		942591C81C442664002917DD /* Zombie.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Zombie.cpp; path = src/Zombie.cpp; sourceTree = "<group>"; };
 		945A84701C2CF21B0074F0C3 /* AP-Team-Project */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "AP-Team-Project"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94FE01F71C2CF4D2001922D1 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -42,6 +57,16 @@
 			isa = PBXGroup;
 			children = (
 				94FE01F71C2CF4D2001922D1 /* main.cpp */,
+				942591C41C442664002917DD /* Game.cpp */,
+				942591C51C442664002917DD /* Map.cpp */,
+				942591C61C442664002917DD /* Plant.cpp */,
+				942591C71C442664002917DD /* Player.cpp */,
+				942591C81C442664002917DD /* Zombie.cpp */,
+				942591BF1C442653002917DD /* Game.h */,
+				942591C01C442653002917DD /* Map.h */,
+				942591C11C442653002917DD /* Plant.h */,
+				942591C21C442653002917DD /* Player.h */,
+				942591C31C442653002917DD /* Zombie.h */,
 				945A84711C2CF21B0074F0C3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -110,7 +135,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				942591CA1C442664002917DD /* Map.cpp in Sources */,
+				942591CD1C442664002917DD /* Zombie.cpp in Sources */,
+				942591CB1C442664002917DD /* Plant.cpp in Sources */,
 				94FE01F81C2CF4D2001922D1 /* main.cpp in Sources */,
+				942591C91C442664002917DD /* Game.cpp in Sources */,
+				942591CC1C442664002917DD /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
