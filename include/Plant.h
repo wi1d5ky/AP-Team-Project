@@ -23,7 +23,7 @@ class Plant
         int cost_ ;
         std::string Name_ ;
         int HP_;
-        constexpr static int full_HP_ = 75;
+        constexpr static int full_HP_ = 75; // not all plants have the same full HP!
 
 };
 

@@ -3,28 +3,30 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <time.h>
 #include "Player.h"
 #include "Zombie.h"
 #include "Map.h"
+#include "Game.h"
 
 using namespace std;
 
 #if TESTMODE
 
-void StartMenu()
-{
-    cout << "-----------------------------" << endl
-         << "|     Plants vs. Zombies    |" << endl
-         << "-----------------------------" << endl ;
-}
+
 
 int main()
 {
-	/*
-    StartMenu();
+    srand(time(0));
+    
+    Game game(8,3);
+    
 
-    cout << "Number of lands on the map (1-10, default:8)...>" << endl;
-    */
+    game.DisplayOfPlant();
+    
+    
+    
+    
     int land_num = 8;
 
     ///////////////////////////////////////////////////////////
