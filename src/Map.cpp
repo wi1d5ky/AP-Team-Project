@@ -13,7 +13,8 @@ bool Land::put(Plant & plant)
 
 Map::Map(int land_num)
 {
-	assert(land_num > 0 && land_num <= Land::max_num);
+	if(land_num > 0 && land_num <= max_land_num)
+		throw "Number of Land should less than " + max_land_num;
 
 	for(int i = 0 ; i < land_num ; ++i)
 	{
@@ -22,7 +23,3 @@ Map::Map(int land_num)
 	}
 }
 
-bool Map::put(Plant & plant, int position)
-{
-	return lands_[position].put(plant);
-}

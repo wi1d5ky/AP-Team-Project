@@ -3,15 +3,12 @@
 
 #include <string>
 #include "Plant.h"
-#include "Zombie.h"
 
 class Land
 {
 	public:
-		constexpr static int max_num = 10;
-		const std::string getPlantName() const { return plant_ == nullptr? "Empty" : plant_->getName(); };
+		const std::string getPlantName() const { return isStood_? plant_->getName() : "Empty"; }
 		bool put(Plant & plant);
-	protected:
 
 	private:
 		Plant * plant_ = nullptr;
@@ -31,14 +28,14 @@ class Map
 		// with this constructor, you could get a map with [land_num] empty land
 		Map(int land_num);
 
-		bool put(Plant & plant, int position);
+		Land operator[] (int i) { return lands_[i]; }
+		const Land operator[] (int i) const { return lands_[i]; }
 
-		const std::string land(int i) const {return lands_[i].getPlantName();};
 		int size() { return lands_.size(); }
-
-	protected:
+		bool put(Plant & plant, int position) { return lands_[position].put(plant); }
 
 	private:
+		constexpr static int max_land_num = 10;
 		std::vector<Land> lands_;
 };
 
