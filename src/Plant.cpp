@@ -1,6 +1,7 @@
 #include "Plant.h"
 
-Plant::Plant(int cost, int fullHP, std::string name):cost_(cost), full_HP_(fullHP), name_(name)
+Plant::Plant(int cost, int fullHP, std::string name)
+	:full_HP_(fullHP), name_(name), cost_(cost)
 {
 	/* NO NEED TO ENTER ANY CODE*/
 }
@@ -29,7 +30,8 @@ HealPlant::HealPlant(int cost,int fullHP, std::string name,int heal)
 	/* NO NEED TO ENTER ANY CODE*/
 };
 
-ShotPlant(int cost,int fullHP, std::string name,int damage):Plant(cost,fullHP,name),damage_(damage)
+ShotPlant::ShotPlant(int cost,int fullHP, std::string name,int damage)
+	:Plant(cost,fullHP,name),damage_(damage)
 {
 	/* NO NEED TO ENTER ANY CODE*/
 };

@@ -26,7 +26,7 @@ bool Game::InitPlants() // process file plants.txt
         string input,name,cost_str;
         int cost = 0;
         int fullHP = 0;
-        
+
         //getline(f,input);
         f >> input;
 
@@ -79,10 +79,10 @@ bool Game::InitPlants() // process file plants.txt
         }
         else
         {
-            
+
         }
     }
-    
+
     f.close();
     return true;
 }
@@ -90,7 +90,7 @@ bool Game::InitPlants() // process file plants.txt
 vector<Plant*> Game::plantTypes_;
 void Game::DisplayOfPlant()
 {
-    for (int i=0; i < plantTypes_.size(); i+=1)
+    for (unsigned int i=0; i < plantTypes_.size(); i+=1)
     {
         cout << "[" << to_string(i) << "] " << plantTypes_[i]->getName() << " $" << plantTypes_[i]->cost() << " HP: " << plantTypes_[i]->getFullHP() << " - " << plantTypes_[i]->display() << endl;
     }

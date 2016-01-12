@@ -25,7 +25,7 @@ protected:
     int full_HP_; // not all plants have the same full HP
     int hp_ = 0;
     std::string name_;
-    int cost_ = 0;
+    int cost_;
 };
 
 class CoinPlant:public Plant
@@ -59,7 +59,7 @@ class HealPlant:public Plant
 {
 public:
     HealPlant()=default;
-	HealPlant::HealPlant(int cost,int fullHP, std::string name,int heal);
+	HealPlant(int cost,int fullHP, std::string name,int heal);
     virtual std::string display() { return "gives all your plants " + std::to_string(heal_) + " HP back."; }
     //void Do(Game);
     //void Attacked(Game);
@@ -71,7 +71,7 @@ class ShotPlant:public Plant
 {
 public:
     ShotPlant()=default;
-    ShotPlant(int cost,int fullHP, std::string name,int damage):Plant(cost,fullHP,name),damage_(damage)
+    ShotPlant(int cost,int fullHP, std::string name,int damage);
     virtual std::string display() { return "gives " + std::to_string(damage_) + " damage points"; }
 	//void Do(Game);
     //void Attacked(Game);
