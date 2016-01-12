@@ -1,37 +1,38 @@
 #include "Plant.h"
+#include <iostream>
+using namespace std ;
 
-Plant::Plant(int cost, int fullHP, std::string name)
-	:full_HP_(fullHP), name_(name), cost_(cost)
-{
-	/* NO NEED TO ENTER ANY CODE*/
+Plant::Plant(string name, int cost, int fullhp)
+	:name_(name),cost_(cost),fullhp_(fullhp),hp_(fullhp){}
+
+CoinPlant::CoinPlant(string name, int cost, int fullhp, int round, int coin)
+    :Plant(name, cost, fullhp) ,round_(round), coin_(coin){}
+
+void CoinPlant::display(){
+	cout << name_ << " $" << cost_ << " HP: " << hp_
+        << " - gives $" << coin_ << " every " << round_ << " rounds" << endl ;
 }
 
-CoinPlant::CoinPlant(int cost, int fullHP, std::string name, int happend, int getmoney)
-   :Plant(cost, fullHP, name) ,happend_round_(happend), getmoney_(getmoney)
-{
-	/* NO NEED TO ENTER ANY CODE*/
-};
+BombPlant( std::string name, int cost, int fullhp, int damage )
+	:Plant(name, cost, fullhp), damage_(fullhp){}
 
-std::string CoinPlant::display()
-{
-	return "gives $" + std::to_string(getmoney_)
-		+ " every " + std::to_string(happend_round_) + " rounds";
+void BombPlant::display(){
+	cout << name_ << " $" << cost_ << " HP: " << hp_
+            << " - gives" << damage_ << " damage points" << endl ;
 }
 
-BombPlant::BombPlant(int cost,int fullHP, std::string name)
-	:Plant(cost,fullHP,name),damage_(fullHP)
-{
-	/* NO NEED TO ENTER ANY CODE*/
-};
+HealPlant::HealPlant( std::string name, int cost, int fullhp, int heal)
+	:Plant(name, cost, fullhp),heal_(heal){}
 
-HealPlant::HealPlant(int cost,int fullHP, std::string name,int heal)
-	:Plant(cost,fullHP,name),heal_(heal)
-{
-	/* NO NEED TO ENTER ANY CODE*/
-};
+void HealPlant::display(){
+	cout << name_ << " $" << cost_ << " HP: " << hp_
+            << " - gives all your plants " << heal_ << " HP back" << endl ;
+}
 
-ShotPlant::ShotPlant(int cost,int fullHP, std::string name,int damage)
-	:Plant(cost,fullHP,name),damage_(damage)
-{
-	/* NO NEED TO ENTER ANY CODE*/
-};
+ShotPlant::ShotPlant(std::string name, int cost, int fullhp, int damage)
+	:Plant(name, cost, fullhp),damage_(damage){}
+
+void ShotPlant::display(){
+	cout << name_ << " $" << cost_ << " HP: " << hp_
+            << " - gives" << damage_ << " damage points" << endl ;
+}

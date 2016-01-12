@@ -3,80 +3,109 @@
 
 #include<string>
 
-class Plant
-{
+struct Effect {
+    int coin   = 0 ,
+        heal   = 0 ,
+        damage = 0 ;
+};
+
+class Plant{
+
 public:
     Plant()=default;
-    Plant(int cost, int fullHP, std::string name);
+    Plant( std::string name, int cost, int fullhp );
 
-    // hp
-    int getFullHP() { return full_HP_; }
-    int HP() { return hp_; }
-    int hurt( int hurt) { return hp_ -= hurt; }
+    int getFullHP() const{
+        return fullhp_;
+    }
+    int gethp() const{
+        return hp_;
+    }
+    int getCost() const{
+        return cost_;
+    }
+    std::string getName() const{
+        return name_ ;
+    }
+    void setName(std::string name) {
+        name_ = name;
+    }
 
-    // name
-    std::string getName() { return name_; }
-    void setName(std::string name) { name_ = name; };
+    int hurt( int hurt) {
+        return hp_ -= hurt;
+    }
 
-    int cost() { return cost_; }
-    virtual std::string display() { return "Description of Plant"; }
+
+    virtual void display()const {}
+    virtual Effect doThing() {}     // Player on plant
+    virtual Effect beAttacked() {}  // Zombie on plant
+
 
 protected:
-    int full_HP_; // not all plants have the same full HP
+    std::string name_ = "";
+    int cost_ = 0;
+    int fullhp_ = 0;
     int hp_ = 0;
-    std::string name_;
-    int cost_;
+
 };
 
-class CoinPlant:public Plant
-{
+class CoinPlant:public Plant{
+
 public:
     CoinPlant()=default;
-    CoinPlant(int cost,int fullHP, std::string name, int happend, int getmoney);
-    virtual std::string display();
-    //void Do(Game);
-    //void Attacked(Game);
+    CoinPlant( std::string name, int cost, int fullhp, int round, int coin );
+
+    virtual void display()const ;
+    virtual Effect doThing() ;
+    virtual Effect beAttacked() ;
+
 private:
-    int happend_round_ = 2; // non static is easier to set
-    int getmoney_ ;
-    int visited_ = 0;
+    int round_ = 0 ; // non static is easier to set
+    int coin_ = 0 ;
+    int visited_ = 0 ;
+
 };
 
-class BombPlant:public Plant
-{
+class BombPlant:public Plant{
+
 public:
     BombPlant()=default;
-    BombPlant(int cost, int fullHP, std::string name);
+    BombPlant( std::string name, int cost, int fullhp );
 
-    virtual std::string display() { return "gives " + std::to_string(damage_) + " damage points"; }
-    //void Do(Game);
-    //void Attacked(Game);
-private:
-    int damage_;
+    virtual void display()const ;
+    virtual Effect doThing() ;
+    virtual Effect beAttacked() ;
+
 };
 
-class HealPlant:public Plant
-{
+class HealPlant:public Plant{
+
 public:
     HealPlant()=default;
-	HealPlant(int cost,int fullHP, std::string name,int heal);
-    virtual std::string display() { return "gives all your plants " + std::to_string(heal_) + " HP back."; }
-    //void Do(Game);
-    //void Attacked(Game);
+	HealPlant(std::string name, int cost, int fullhp);
+
+    virtual void display()const ;
+    virtual Effect doThing() ;
+    virtual Effect beAttacked() ;
+
 private:
-    int heal_;
+    int heal_=0;
+
 };
 
-class ShotPlant:public Plant
-{
+class ShotPlant:public Plant{
+
 public:
     ShotPlant()=default;
-    ShotPlant(int cost,int fullHP, std::string name,int damage);
-    virtual std::string display() { return "gives " + std::to_string(damage_) + " damage points"; }
-	//void Do(Game);
-    //void Attacked(Game);
+    ShotPlant(std::string name, int cost, int fullhp);
+
+    virtual void display()const ;
+    virtual Effect doThing() ;
+    virtual Effect beAttacked() ;
+
 private:
-    int damage_;
+    int damage_=0;
+
 };
 
 #endif // PLANT_H
