@@ -13,18 +13,15 @@ using namespace std;
 
 #if TESTMODE
 
-
-
 int main()
 {
     srand(time(0));
-    
+
     Game game(8,3);
-    
+
     game.InitPlants();
     game.DisplayOfPlant();
-    
-    
+
     int land_num = 8;
 
     ///////////////////////////////////////////////////////////
@@ -50,16 +47,12 @@ int main()
 
 	Map * game_map = new Map(land_num);
 	Player player;
-	vector<string> menu = player.store();
 
 	cout << "Player has $" << player.currentMoney() << endl;
 	cout << "There are " << game_map->size() <<  " planet(s) on the map:" << endl;
 
 	for(int i = 0 ; i < game_map->size() ; ++i)
 		cout << game_map->land(i) << endl;
-
-	for(unsigned int i = 0 ; i < menu.size() ; ++i)
-		cout << "[" + to_string(i) + "] " + menu[i] << endl;
 
 	/*
 	///////////////////////////////////////////////////////////
