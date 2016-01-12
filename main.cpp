@@ -15,6 +15,7 @@ using namespace std;
 
 int main()
 {
+    /*
     srand(time(0));
 
     Game game(8,3);
@@ -23,7 +24,6 @@ int main()
     game.DisplayOfPlant();
 
     int land_num = 8;
-
     ///////////////////////////////////////////////////////////
 
 	constexpr int zombie_num = 3;
@@ -33,7 +33,6 @@ int main()
     zombies[1] = new Zombie(5);
     zombies[2] = new Zombie(6);
 
-    /*
     for(int i = 0 ; i < 3 ; ++i)
 	{
 		cout << "[" + to_string(i) + "] Damage: " + to_string(zombies[i]->attack()) + " HP:";
@@ -41,7 +40,6 @@ int main()
 			cout << "*";
 		cout << endl;
 	}
-	*/
 
     ///////////////////////////////////////////////////////////
 
@@ -54,7 +52,6 @@ int main()
 	for(int i = 0 ; i < game_map->size() ; ++i)
 		cout << game_map->land(i) << endl;
 
-	/*
 	///////////////////////////////////////////////////////////
 
 	int stand = 7;
@@ -73,10 +70,9 @@ int main()
 
     for(int i = 0 ; i < game_map->size() ; ++i)
 		cout << game_map->land(i) << endl;
-	*/
+
 	///////////////////////////////////////////////////////////
 
-	/*
 	cout << "////// Zombie Position /////" << endl;
 	for(int i = 0 ; i < zombie_num ; ++i)
 		cout << "[" + to_string(i) +"] " << zombies[i]->position() << endl;
@@ -89,11 +85,8 @@ int main()
 
 	for(int i = 0 ; i < zombie_num ; ++i)
 		cout << "[" + to_string(i) +"] " << zombies[i]->position() << endl;
-	*/
 
 	///////////////////////////
-
-	/*
 
 	cout << player.currentMoney() << endl;
 	cout << (player.canBuy() ? "Can Buy!" : "Can't Buy") << endl;
@@ -104,6 +97,7 @@ int main()
 	cout << (player.canBuy() ? "Can Buy!" : "Can't Buy") << endl;
 
 	*/
+
 
 	return 0;
 }

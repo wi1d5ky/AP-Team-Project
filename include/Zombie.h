@@ -1,27 +1,23 @@
 #ifndef ZOMBIE_H
 #define ZOMBIE_H
 
-#include "Plant.h"
-
 class Zombie
 {
 	public:
-		Zombie(int pos);
+		Zombie(int pos):position_(pos) {}
 
-		int getHP() { return HP_; };
-		void setPos(int i) {pos_ = i;};
-		int position() { return pos_;};
-		int attack() { return power_; };
-		int getFullHP() {return full_HP_;};
-
-	protected:
+		int getFullHP() { return full_hp_; }
+		int getHP() { return hp_; }
+		int hurt(int cost) { return hp_ -= cost; }
+		int getPos() { return position_; }
+		void setPos(int i) { position_ = i; }
+		int attack() { return power_; }
 
 	private:
-		int pos_;
-		int HP_ = full_HP_; // current HP
+		int position_;
+		int hp_ = full_hp_;
 		constexpr static int power_ = 15;
-		constexpr static int full_HP_ = 40;
-		constexpr static int max_num = 10;
+		constexpr static int full_hp_ = 40;
 };
 
 #endif // ZOMBIE_H
