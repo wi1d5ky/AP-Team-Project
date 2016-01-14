@@ -26,7 +26,7 @@ class Player
 	private:
 		constexpr static int default_money = 150;
 		int money_ = default_money;
-		int position_;
+		int position_ = 0;
 };
 
 #endif // PLAYER_H
