@@ -41,8 +41,7 @@ public:
         } //operator
     Plant& operator +=(int heal)
     {
-        if(hp_<fullhp_)
-            hp_+=heal;
+        hp_+=heal;
         if(hp_>fullhp_)
             hp_=fullhp_;
         return *this;
