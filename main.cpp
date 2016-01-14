@@ -13,10 +13,12 @@ using namespace std;
 
 #if TESTMODE
 
+constexpr static int MAX = 10;// lands and zombies
+
 int ReadChoice(char input[])
 {
     int choice = atoi(input);
-    if (choice < 1 && choice > 10)
+    if (choice < 1 && choice > MAX)
     {
         return -1;
     }
