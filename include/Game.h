@@ -14,14 +14,14 @@ public:
     void DisplayOfPlant()const;
     void DisplayMap()const;
     void DisplayZombieInfo()const;
-    
+
     bool InitPlants();
-    
+
     void PlayerAction();
     void PlantAction();
     void ZombieAction();
-    
-    int Walk()
+
+    int Walk();
 
 
 
@@ -32,16 +32,16 @@ private:
     Map map_;
     int numOfZombie_ = 3;
     int numOfLand_ = 8;
-    
+
     int remainZombie_ = numOfZombie_;
     int numOfDeadBomb_ = 0;
-    
+
     int lastmove_ = 4;
 
     Player player_;
 
     std::vector<Zombie*> zombies_;
-    
+
     int Choice(std::string input);
     void MinPriceOfPlant();
     bool EnoughMoney(){return player_.currentMoney() > min_price_;}

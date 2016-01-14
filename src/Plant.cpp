@@ -9,17 +9,6 @@ Plant::Plant(const std::string& name, int cost, int fullhp)
 	:name_(name),cost_(cost),fullhp_(fullhp),hp_(fullhp){}
 
 //Copy Constructor
-<<<<<<< HEAD
-<<<<<<< HEAD
-Plant::Plant(const Plant &plant)
-{
-    this->name_ = plant.name_;
-    this->cost_ = plant.cost_;
-    this->fullhp_ = plant.fullhp_;
-    this->hp_ = plant.hp_;
-}
-
-/* doThing() return the rest of visited time */
 Plant::Plant(const Plant &plant):name_(plant.name_),cost_(plant.cost_),fullhp_(plant.fullhp_),hp_(plant.hp_){}
 
 /* doThing() return heal point */
