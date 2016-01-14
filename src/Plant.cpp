@@ -2,9 +2,10 @@
 #include "Zombie.h"
 #include "Player.h"
 #include <iostream>
+#include <vector>
 using namespace std ;
 
-Plant::Plant(string name, int cost, int fullhp)
+Plant::Plant(const std::string& name, int cost, int fullhp)
 	:name_(name),cost_(cost),fullhp_(fullhp),hp_(fullhp){}
 
 //Copy Constructor
@@ -16,15 +17,15 @@ Plant::Plant(const Plant &plant)
     this->hp_ = plant.hp_;
 }
 
-/* doThing() return heal point */
+/* doThing() return the rest of visited time */
 /* beAttacked() return whether plant is alive after attack of zombie */
 
 void Plant::display() const {}
-int Plant::doThing(Player& py) { return 0 ;}     // Player on plant
+int Plant::doThing(Player& py , vector<Plant*>& plantlist ) { return 0 ;}     // Player on plant
 int Plant::beAttacked(Zombie& zb) { return 0 ;}  // Zombie on plant
 
 
-CoinPlant::CoinPlant(string name, int cost, int fullhp, int round, int coin)
+CoinPlant::CoinPlant(const std::string& name, int cost, int fullhp, int round, int coin)
     :Plant(name, cost, fullhp) ,round_(round), coin_(coin), visited_(0){}
 
 CoinPlant::CoinPlant(const CoinPlant &coinplant):Plant(coinplant)
@@ -39,12 +40,13 @@ void CoinPlant::display()const{
         << " - gives $" << coin_ << " every " << round_ << " rounds" << endl ;
 }
 
-int CoinPlant::doThing(Player& py) {
+int CoinPlant::doThing(Player& py , vector<Plant*>& plantlist ) {
     if( ++visited_ >= round_ ){
         py += coin_  ;
         visited_ = 0 ;
+        return 0 ;
     }
-    return 0 ;
+    return round_ - visited_ ;
 }
 int CoinPlant::beAttacked(Zombie& zb) {
     hp_ -= zb.getAttack() ;
@@ -55,7 +57,7 @@ int CoinPlant::beAttacked(Zombie& zb) {
     return 1 ;              // Plant is alive
 }
 
-BombPlant::BombPlant(string name, int cost, int fullhp )
+BombPlant::BombPlant(const std::string& name, int cost, int fullhp )
 :Plant(name, cost, fullhp), damage_(fullhp){}
 
 BombPlant::BombPlant(const BombPlant &bombplant):Plant(bombplant)
@@ -68,10 +70,6 @@ void BombPlant::display()const{
             << " - gives " << damage_ << " damage points" << endl ;
 }
 
-int BombPlant::doThing(Player& py) {
-    /* Nothing happen */
-    return 0 ;
-}
 int BombPlant::beAttacked(Zombie& zb) {
     hp_ = 0 ;
     zb -= damage_ ;
@@ -79,7 +77,7 @@ int BombPlant::beAttacked(Zombie& zb) {
     return 0 ;              // Always die
 }
 
-HealPlant::HealPlant( std::string name, int cost, int fullhp, int heal)
+HealPlant::HealPlant( const std::string& name, int cost, int fullhp, int heal)
 	:Plant(name, cost, fullhp),heal_(heal){}
 
 HealPlant::HealPlant(const HealPlant &healplant):Plant(healplant)
@@ -92,8 +90,11 @@ void HealPlant::display()const{
             << " - gives all your plants " << heal_ << " HP back." << endl ;
 }
 
-int HealPlant::doThing(Player& py) {
-    return heal_ ;
+int HealPlant::doThing(Player& py , vector<Plant*>& plantlist) {
+    for( auto& plant : plantlist ){
+        *plant += heal_ ;
+    }
+    return 0 ;
 }
 int HealPlant::beAttacked(Zombie& zb) {
     hp_ -= zb.getAttack() ;
@@ -101,7 +102,7 @@ int HealPlant::beAttacked(Zombie& zb) {
     else return 1 ;
 }
 
-ShotPlant::ShotPlant(std::string name, int cost, int fullhp, int damage)
+ShotPlant::ShotPlant(const std::string& name, int cost, int fullhp, int damage)
 	:Plant(name, cost, fullhp),damage_(damage){}
 
 ShotPlant::ShotPlant(const ShotPlant &shotplant):Plant(shotplant)
@@ -113,10 +114,6 @@ void ShotPlant::display()const{
             << " - gives " << damage_ << " damage points" << endl ;
 }
 
-int ShotPlant::doThing(Player& py) {
-    /* Nothing happen */
-    return 0 ;
-}
 int ShotPlant::beAttacked(Zombie& zb) {
     zb -= damage_ ;
     if( zb.isDied() ) return 1 ;

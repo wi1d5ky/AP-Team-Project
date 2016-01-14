@@ -2,6 +2,7 @@
 #define PLANT_H
 
 #include<string>
+#include<vector>
 
 class Player ;
 class Zombie ;
@@ -10,8 +11,8 @@ class Plant{
 
 public:
     Plant()=default;
-    Plant( std::string name, int cost, int fullhp );
-    Plant(const Plant &plant);
+    Plant( const std::string& name, int cost, int fullhp );
+    Plant( const Plant &plant );
 
     int getFullHP() const{
         return fullhp_;
@@ -39,7 +40,7 @@ public:
 
 
     virtual void display() const ;
-    virtual int doThing(Player& py) ;     // Player on plant
+    virtual int doThing(Player& py , std::vector<Plant*>& plantlist) ;     // Player on plant
     virtual int beAttacked(Zombie& zb) ;  // Zombie on plant
 
 protected:
@@ -54,11 +55,11 @@ class CoinPlant:public Plant{
 
 public:
     CoinPlant()=default;
-    CoinPlant( std::string name, int cost, int fullhp, int round, int coin );
+    CoinPlant( const std::string& name, int cost, int fullhp, int round, int coin );
     CoinPlant(const CoinPlant &coinplant);
 
     virtual void display()const ;
-    virtual int doThing(Player& py) ;
+    virtual int doThing(Player& py , std::vector<Plant*>& plantlist) ;
     virtual int beAttacked(Zombie& zb) ;
 
 private:
@@ -72,11 +73,10 @@ class BombPlant:public Plant{
 
 public:
     BombPlant()=default;
-    BombPlant(std::string name, int cost, int fullhp );
+    BombPlant( const std::string& name, int cost, int fullhp );
     BombPlant(const BombPlant &bombplant);
 
     virtual void display()const ;
-    virtual int doThing(Player& py) ;
     virtual int beAttacked(Zombie& zb) ;
 
 private:
@@ -88,11 +88,11 @@ class HealPlant:public Plant{
 
 public:
     HealPlant()=default;
-	HealPlant(std::string name, int cost, int fullhp, int heal);
+	HealPlant(const std::string& name, int cost, int fullhp, int heal);
 	HealPlant(const HealPlant &healplant);
 
     virtual void display()const ;
-    virtual int doThing(Player& py) ;
+    virtual int doThing(Player& py , std::vector<Plant*>& plantlist) ;
     virtual int beAttacked(Zombie& zb) ;
 
 private:
@@ -104,11 +104,10 @@ class ShotPlant:public Plant{
 
 public:
     ShotPlant()=default;
-    ShotPlant(std::string name, int cost, int fullhp, int damage);
+    ShotPlant(const std::string& name, int cost, int fullhp, int damage);
     ShotPlant(const ShotPlant &shotplant);
 
     virtual void display()const ;
-    virtual int doThing(Player& py) ;
     virtual int beAttacked(Zombie& zb) ;
 
 private:
