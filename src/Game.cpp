@@ -181,6 +181,11 @@ int Game::Choice(char input)
 
 void Game::PutMenu()
 {
+    if (map_[player_.getPos()].getStood())
+    {
+        Wait();
+        return;
+    }
     if (!EnoughMoney())
     {
         cout << "You do not have enough money to plant anything!" << endl;
@@ -189,5 +194,12 @@ void Game::PutMenu()
     }
     cout << "Player $" << player_.currentMoney() << ":    Enter your choice (4 to give up, default:4)...>";
     int choice = Choice(cin.get());
+    if (choice == -1)
+    {
+        cout << "You give up!" << endl;
+        Wait();
+        return;
+    }
+    map_.put(plantTypes_[choice], player_.getPos()); // bool
 
 }
