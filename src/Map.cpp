@@ -6,9 +6,18 @@ bool Land::put(Plant & plant)
 	if(isStood_)
 		 return false;
 
-	plant_ = &plant;
+	plant_ = new Plant(plant);
 	isStood_ = true;
 	return true;
+}
+
+Land::~Land()
+{
+	if(plant_ != nullptr)
+	{
+        delete plant_;
+        isStood_ = false;
+	}
 }
 
 Map::Map(int land_num)
