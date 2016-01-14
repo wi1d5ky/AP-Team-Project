@@ -27,13 +27,6 @@ public:
         return name_ ;
     }
 
-    void setName( const std::string& name ) {
-        name_ = name;
-    }
-
-    int hurt( int hurt) {
-        return hp_ -= hurt;
-    }
 
     Plant& operator -=(int hurt){
         hp_-=hurt;
