@@ -47,6 +47,4 @@ private:
     std::vector<Zombie> zombies_;
 };
 
-int ReadChoice(char input[]);
-
 #endif // GAME_H
