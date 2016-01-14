@@ -3,11 +3,8 @@
 
 #include<string>
 
-struct Effect {
-    int coin_   = 0 ,
-        heal_   = 0 ,
-        damage_ = 0 ;
-};
+class Player ;
+class Zombie ;
 
 class Plant{
 
@@ -24,10 +21,11 @@ public:
     int getCost() const{
         return cost_;
     }
-    std::string getName() const{
+    const std::string& getName() const{
         return name_ ;
     }
-    void setName(std::string name) {
+
+    void setName( const std::string& name ) {
         name_ = name;
     }
 
@@ -36,10 +34,9 @@ public:
     }
 
 
-    virtual void display()const {}
-    virtual Effect doThing() {}     // Player on plant
-    virtual Effect beAttacked() {}  // Zombie on plant
-
+    virtual void display() const ;
+    virtual int doThing(Player py) ;     // Player on plant
+    virtual int beAttacked(Zombie zb) ;  // Zombie on plant
 
 protected:
     std::string name_ = "";
@@ -56,8 +53,8 @@ public:
     CoinPlant( std::string name, int cost, int fullhp, int round, int coin );
 
     virtual void display()const ;
-    virtual Effect doThing() ;
-    virtual Effect beAttacked() ;
+    virtual int doThing(Player) ;
+    virtual int beAttacked(Zombie) ;
 
 private:
     int round_ = 0 ; // non static is easier to set
@@ -73,8 +70,8 @@ public:
     BombPlant(std::string name, int cost, int fullhp );
 
     virtual void display()const ;
-    virtual Effect doThing() ;
-    virtual Effect beAttacked() ;
+    virtual int doThing(Player) ;
+    virtual int beAttacked(Zombie) ;
 
 private:
     int damage_ = 0 ;
@@ -88,11 +85,11 @@ public:
 	HealPlant(std::string name, int cost, int fullhp, int heal);
 
     virtual void display()const ;
-    virtual Effect doThing() ;
-    virtual Effect beAttacked() ;
+    virtual int doThing(Player) ;
+    virtual int beAttacked(Zombie) ;
 
 private:
-    int heal_=0;
+    int heal_= 0 ;
 
 };
 
@@ -103,11 +100,11 @@ public:
     ShotPlant(std::string name, int cost, int fullhp, int damage);
 
     virtual void display()const ;
-    virtual Effect doThing() ;
-    virtual Effect beAttacked() ;
+    virtual int doThing(Player) ;
+    virtual int beAttacked(Zombie) ;
 
 private:
-    int damage_=0;
+    int damage_ = 0;
 
 };
 
