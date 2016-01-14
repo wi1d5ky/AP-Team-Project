@@ -11,7 +11,7 @@ class Player
 		// return value ==> trade success or not
 		bool trade(int change);
 		int currentMoney() { return money_; };
-		int getPos() { return position_; }
+		int getPos()const { return position_; }
 		void setPos(int pos) { position_ = pos; };
 
 	private:

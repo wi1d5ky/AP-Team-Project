@@ -9,7 +9,7 @@ class Zombie
 		int getFullHP() { return full_hp_; }
 		int getHP() { return hp_; }
 		int hurt(int cost) { return hp_ -= cost; }
-		int getPos() { return position_; }
+		int getPos()const { return position_; }
 		void setPos(int i) { position_ = i; }
 		int attack() { return power_; }
 		bool isDied(){ return hp_ <= 0 ;}
