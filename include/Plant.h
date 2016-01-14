@@ -35,8 +35,8 @@ public:
 
 
     virtual void display() const ;
-    virtual int doThing(Player py) ;     // Player on plant
-    virtual int beAttacked(Zombie zb) ;  // Zombie on plant
+    virtual int doThing(Player& py) ;     // Player on plant
+    virtual int beAttacked(Zombie& zb) ;  // Zombie on plant
 
 protected:
     std::string name_ = "";
@@ -53,8 +53,8 @@ public:
     CoinPlant( std::string name, int cost, int fullhp, int round, int coin );
 
     virtual void display()const ;
-    virtual int doThing(Player) ;
-    virtual int beAttacked(Zombie) ;
+    virtual int doThing(Player& py) ;
+    virtual int beAttacked(Zombie& zb) ;
 
 private:
     int round_ = 0 ; // non static is easier to set
@@ -70,8 +70,8 @@ public:
     BombPlant(std::string name, int cost, int fullhp );
 
     virtual void display()const ;
-    virtual int doThing(Player) ;
-    virtual int beAttacked(Zombie) ;
+    virtual int doThing(Player& py) ;
+    virtual int beAttacked(Zombie& zb) ;
 
 private:
     int damage_ = 0 ;
@@ -85,8 +85,8 @@ public:
 	HealPlant(std::string name, int cost, int fullhp, int heal);
 
     virtual void display()const ;
-    virtual int doThing(Player) ;
-    virtual int beAttacked(Zombie) ;
+    virtual int doThing(Player& py) ;
+    virtual int beAttacked(Zombie& zb) ;
 
 private:
     int heal_= 0 ;
@@ -100,8 +100,8 @@ public:
     ShotPlant(std::string name, int cost, int fullhp, int damage);
 
     virtual void display()const ;
-    virtual int doThing(Player) ;
-    virtual int beAttacked(Zombie) ;
+    virtual int doThing(Player& py) ;
+    virtual int beAttacked(Zombie& zb) ;
 
 private:
     int damage_ = 0;

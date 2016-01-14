@@ -12,6 +12,7 @@ class Zombie
 		int getPos() { return position_; }
 		void setPos(int i) { position_ = i; }
 		int attack() { return power_; }
+		bool isDied(){ return hp_ <= 0 ;}
 
 	private:
 		int position_;
