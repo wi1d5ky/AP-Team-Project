@@ -9,6 +9,8 @@ Plant::Plant(const std::string& name, int cost, int fullhp)
 	:name_(name),cost_(cost),fullhp_(fullhp),hp_(fullhp){}
 
 //Copy Constructor
+<<<<<<< HEAD
+<<<<<<< HEAD
 Plant::Plant(const Plant &plant)
 {
     this->name_ = plant.name_;
@@ -18,6 +20,10 @@ Plant::Plant(const Plant &plant)
 }
 
 /* doThing() return the rest of visited time */
+Plant::Plant(const Plant &plant):name_(plant.name_),cost_(plant.cost_),fullhp_(plant.fullhp_),hp_(plant.hp_){}
+
+/* doThing() return heal point */
+
 /* beAttacked() return whether plant is alive after attack of zombie */
 
 void Plant::display() const {}
@@ -28,12 +34,7 @@ int Plant::beAttacked(Zombie& zb) { return 0 ;}  // Zombie on plant
 CoinPlant::CoinPlant(const std::string& name, int cost, int fullhp, int round, int coin)
     :Plant(name, cost, fullhp) ,round_(round), coin_(coin), visited_(0){}
 
-CoinPlant::CoinPlant(const CoinPlant &coinplant):Plant(coinplant)
-{
-    this->round_=coinplant.round_;
-    this->coin_=coinplant.coin_;
-    this->visited_=coinplant.visited_;
-}
+CoinPlant::CoinPlant(const CoinPlant &coinplant):Plant(coinplant),round_(coinplant.round_),coin_(coinplant.coin_),visited_(coinplant.visited_){}
 
 void CoinPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
@@ -60,10 +61,7 @@ int CoinPlant::beAttacked(Zombie& zb) {
 BombPlant::BombPlant(const std::string& name, int cost, int fullhp )
     :Plant(name, cost, fullhp), damage_(fullhp){}
 
-BombPlant::BombPlant(const BombPlant &bombplant):Plant(bombplant)
-{
-    this->damage_=bombplant.damage_;
-}
+BombPlant::BombPlant(const BombPlant &bombplant):Plant(bombplant),damage_(bombplant.damage_){}
 
 void BombPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
@@ -80,10 +78,7 @@ int BombPlant::beAttacked(Zombie& zb) {
 HealPlant::HealPlant( const std::string& name, int cost, int fullhp, int heal)
 	:Plant(name, cost, fullhp),heal_(heal){}
 
-HealPlant::HealPlant(const HealPlant &healplant):Plant(healplant)
-{
-    this->heal_= healplant.heal_;
-}
+HealPlant::HealPlant(const HealPlant &healplant):Plant(healplant),heal_(healplant.heal_){}
 
 void HealPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
@@ -105,10 +100,8 @@ int HealPlant::beAttacked(Zombie& zb) {
 ShotPlant::ShotPlant(const std::string& name, int cost, int fullhp, int damage)
 	:Plant(name, cost, fullhp),damage_(damage){}
 
-ShotPlant::ShotPlant(const ShotPlant &shotplant):Plant(shotplant)
-{
-    this->damage_=shotplant.damage_;
-}
+ShotPlant::ShotPlant(const ShotPlant &shotplant):Plant(shotplant),damage_(shotplant.damage_){}
+
 void ShotPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
             << " - gives " << damage_ << " damage points" << endl ;

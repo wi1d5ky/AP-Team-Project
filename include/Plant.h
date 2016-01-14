@@ -35,8 +35,17 @@ public:
         return hp_ -= hurt;
     }
 
-    void operator -=(int hurt){hp_-=hurt;} //operator
-    void operator +=(int heal){hp_+=heal;}
+    Plant& operator -=(int hurt){
+        hp_-=hurt;
+        return *this;
+        } //operator
+    Plant& operator +=(int heal)
+    {
+        hp_+=heal;
+        if(hp_>fullhp_)
+            hp_=fullhp_;
+        return *this;
+    }
 
 
     virtual void display() const ;
