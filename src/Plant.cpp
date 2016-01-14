@@ -16,6 +16,10 @@ Plant::Plant(const Plant &plant):name_(plant.name_),cost_(plant.cost_),fullhp_(p
 /* beAttacked() return whether plant is alive after attack of zombie */
 
 void Plant::display() const {}
+void Plant::displayinfo() const
+{
+    cout<<name_ << " HP: "<<hp_;
+}
 int Plant::doThing(Player& py , vector<Plant*>& plantlist ) { return -1 ;}     // Player on plant
 int Plant::beAttacked(Zombie& zb) { return 0 ;}  // Zombie on plant
 
@@ -27,7 +31,11 @@ CoinPlant::CoinPlant(const CoinPlant &coinplant):Plant(coinplant),round_(coinpla
 
 void CoinPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
-        << " - gives $" << coin_ << " every " << round_ << " rounds" << endl ;
+        << " - gives $" << coin_ << " every " << round_ << " rounds" << endl  ;
+}
+
+void CoinPlant::displayinfo()const{
+    cout<< name_ <<" HP: " << hp_ << "<"<< round_-visited_ <<" more visits>";
 }
 
 int CoinPlant::doThing(Player& py , vector<Plant*>& plantlist ) {
@@ -74,6 +82,7 @@ void HealPlant::display()const{
             << " - gives all your plants " << heal_ << " HP back." << endl ;
 }
 
+
 int HealPlant::doThing(Player& py , vector<Plant*>& plantlist) {
     for( auto& plant : plantlist ){
         if( plant != nullptr )
@@ -96,6 +105,7 @@ void ShotPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
             << " - gives " << damage_ << " damage points" << endl ;
 }
+
 
 int ShotPlant::beAttacked(Zombie& zb) {
     zb -= damage_ ;

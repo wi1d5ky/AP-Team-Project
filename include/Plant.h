@@ -42,6 +42,7 @@ public:
 
 
     virtual void display() const ;
+    virtual void displayinfo() const;
     virtual int doThing(Player& py , std::vector<Plant*>& plantlist) ;     // Player on plant
     virtual int beAttacked(Zombie& zb) ;  // Zombie on plant
 
@@ -61,6 +62,7 @@ public:
     CoinPlant(const CoinPlant &coinplant);
 
     virtual void display()const ;
+    virtual void displayinfo()const;
     virtual int doThing(Player& py , std::vector<Plant*>& plantlist) ;
     virtual int beAttacked(Zombie& zb) ;
 
