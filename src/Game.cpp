@@ -15,6 +15,30 @@ void Game::StartMenu()const
          << "-----------------------------" << endl ;
 }
 
+void Game::DisplayBar()const
+{
+    for (int i=0; i<77; i+=1)
+    {
+        cout << "=" ;
+    }
+    cout << endl ;
+}
+
+void Game::DisplayRule()const
+{
+    DisplayBar();
+    cout << "Plants vs. Zombies Rule:" << endl << endl
+         << "How to win:" << endl
+         << "  (1) All zombies are dead." << endl
+         << "  (2) At least one plant is live." << endl
+         << "  (3) The number of dead bomb plants cannot exceed the number of zombies." << endl << endl
+         << "How to lose:" << endl
+         << "  All plants are dead." << endl;
+    DisplayBar();
+    cout << "Press any key to continue...";
+    cin.get();
+}
+
 bool Game::InitPlants() // process file plants.txt
 {
     fstream f;
@@ -108,3 +132,5 @@ void Game::InitZombie()
         zombies_[i] = Zombie(pos);
     }
 }
+
+
