@@ -5,15 +5,7 @@
 
 using namespace std;
 
-int ReadChoice(char input)
-{
-    int choice = atoi(&input);
-    if (choice < 1 && choice > 10)
-    {
-        return -1;
-    }
-    return choice;
-}
+
 
 //===================================================
 
