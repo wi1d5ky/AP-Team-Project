@@ -9,17 +9,18 @@
 class Game
 {
 public:
-    Game(int numOfLand = 8, int numOfZombie = 3) :map_(numOfLand),numOfZombie_(numOfZombie), numOfLand_(numOfLand) {}
+    Game(int numOfLand, int numOfZombie);
 
-    void StartMenu()const;
     void DisplayBar()const;
     void DisplayRule()const;
     void DisplayOfPlant()const;
+    
     void DisplayWin()const;
     void DisplayLose()const;
     void Wait()const;
+    void Clear()const;
     
-    void InitZombie();
+    int InitZombiePos()const;
     bool InitPlants();
     
     void MinPriceOfPlant();
@@ -27,12 +28,12 @@ public:
     
     void PutMenu();
     int Choice(char input);
-    //bool PutPlant(int pos, Plant plant);
     
+    void DisplayMap()const;
 
 
 private:
-    static std::vector<Plant> plantTypes_;
+    static std::vector<Plant*> plantTypes_;
     static int min_price_;
 
     Map map_;
@@ -41,10 +42,12 @@ private:
     
     int remainZombie_ = numOfZombie_;
     int numOfDeadBomb_ = 0;
+    
+    int lastmove_ = 4;
 
     Player player_;
 
-    std::vector<Zombie> zombies_;
+    std::vector<Zombie*> zombies_;
 };
 
 #endif // GAME_H

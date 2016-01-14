@@ -15,10 +15,10 @@ using namespace std;
 
 constexpr static int MAX = 10;// lands and zombies
 
-int ReadChoice(char input[])
+int ReadChoice(string input)
 {
-    int choice = atoi(input);
-    if (choice < 1 && choice > MAX)
+    int choice = atoi(input.c_str());
+    if (choice < 1 || choice > MAX)
     {
         return -1;
     }
@@ -29,24 +29,30 @@ int main()
 {
     srand(time(0));
     
+    cout << "-----------------------------" << endl
+         << "|     Plants vs. Zombies     |" << endl
+         << "-----------------------------" << endl ;
     cout << "Number of lands on the map (1-10, default:8)...>";
-    char land[2],zombie[2];
-    gets(land);
-    int numOfLands = ReadChoice(land);
+    string landstr,zombiestr;
+    getline(cin,landstr);
+    int numOfLands = ReadChoice(landstr);
     if (numOfLands == -1)
     {
         numOfLands = 8;
     }
-    gets(zombie);
-    int numOfZombies = ReadChoice(zombie);
+    cout << "Number of zombies on the map (1-10, default:3)...>";
+    getline(cin,zombiestr);
+    int numOfZombies = ReadChoice(zombiestr);
     if (numOfZombies == -1)
     {
         numOfZombies = 3;
     }
-    
     Game game(numOfLands,numOfZombies);
 
     game.InitPlants();
+    game.DisplayRule();
+    
+    game.DisplayMap();
     game.DisplayOfPlant();
 
     /*
