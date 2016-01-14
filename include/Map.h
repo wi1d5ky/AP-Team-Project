@@ -8,7 +8,7 @@ class Land
 {
 	public:
 		~Land();
-		bool put(Plant & plant);
+		bool put( const Plant& plant);
 		bool getStood()const{return isStood_;}
 		Plant * getPlant() { return plant_; }
 		const Plant * getPlant() const { return plant_; }
@@ -35,7 +35,7 @@ class Map
 		const Land operator[] (int i) const { return lands_[i]; }
 
 		size_t size() { return lands_.size(); }
-		bool put(Plant & plant, int position) { return lands_[position].put(plant); }
+		bool put( const Plant& plant, int position) { return lands_[position].put(plant); }
 
 	private:
 		constexpr static int max_land_num = 10;

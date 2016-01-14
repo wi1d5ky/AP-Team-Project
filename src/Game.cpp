@@ -5,24 +5,20 @@
 
 using namespace std;
 
-vector<Plant*> Game::plantTypes_;
-int Game::min_price_;
-
-Game::Game(int numOfLand, int numOfZombie) :map_(numOfLand),numOfZombie_(numOfZombie), numOfLand_(numOfLand)
+Game::Game(int numOfLand , int numOfZombie ) :map_(numOfLand),numOfZombie_(numOfZombie), numOfLand_(numOfLand)
 {
-    for (int i=0; i<numOfZombie_; i+=1)
-    {
+    for (int i=0; i<numOfZombie_; i+=1){
         Zombie *temp = new Zombie(RandZombiePos());
         zombies_.push_back(temp);
     }
+    InitPlants() ;
 }
 
 bool Game::InitPlants() // process file plants.txt
 {
-    fstream f;
-    f.open("plants.txt");
-    if (!f.is_open())
-    {
+    fstream f("plants.txt");
+
+    if (!f){
         cout << "Can't find plants.txt!" << endl;
         return false;
     }
@@ -37,21 +33,18 @@ bool Game::InitPlants() // process file plants.txt
 
         if (input == "C")//coin plant
         {
-            f >> name;
-            f >> cost_str;
+            f >> name >> cost_str ;
             cost_str.erase(cost_str.begin()+0);// erase $ symbol
             cost = atoi(cost_str.c_str());// change 100 to int
             f >> fullHP;
             int round,getmoney;
-            f >> round;
-            f >> getmoney;
+            f >> round >> getmoney ;
             CoinPlant* plant = new CoinPlant(name,cost,fullHP,round,getmoney);
             plantTypes_.push_back(plant);
         }
         else if(input == "S")//horn plant or shoot plant
         {
-            f >> name;
-            f >> cost_str;
+            f >> name >> cost_str ;
             cost_str.erase(cost_str.begin()+0);// erase $ symbol
             cost = atoi(cost_str.c_str());// change 100 to int
             f >> fullHP;
@@ -62,8 +55,7 @@ bool Game::InitPlants() // process file plants.txt
         }
         else if(input == "B")//bomb plant
         {
-            f >> name;
-            f >> cost_str;
+            f >> name >> cost_str ;
             cost_str.erase(cost_str.begin()+0);// erase $ symbol
             cost = atoi(cost_str.c_str());// change 100 to int
             f >> fullHP;
@@ -72,20 +64,17 @@ bool Game::InitPlants() // process file plants.txt
         }
         else if(input == "H")//heal plant
         {
-            f >> name;
-            f >> cost_str;
+            f >> name >> cost_str ;
             cost_str.erase(cost_str.begin()+0);// erase $ symbol
             cost = atoi(cost_str.c_str());// change 100 to int
-            f >> fullHP;
             int heal;
-            f >> heal;
+            f >> fullHP >> heal;
             HealPlant* plant = new HealPlant(name,cost,fullHP,heal);
             plantTypes_.push_back(plant);
         }
-        else
-        {
 
-        }
+        if( min_price_ > plantTypes_.back()->getCost() )
+            min_price_ = plantTypes_.back()->getCost();
     }
 
     f.close();
@@ -107,22 +96,11 @@ int Game::RandZombiePos()const
     return pos;
 }
 
-void Game::MinPriceOfPlant()
-{
-    min_price_ = INT32_MAX;
-    for (unsigned int i=0; i<plantTypes_.size(); i+=1)
-    {
-        if (min_price_ > plantTypes_[i]->getCost())
-        {
-            min_price_ = plantTypes_[i]->getCost();
-        }
-    }
-}
 
 int Game::Choice(string input)
 {
     int choice = atoi(input.c_str());
-    if (choice < 1 || choice > (int) plantTypes_.size())
+    if (choice < 0 || choice > (int) plantTypes_.size())
     {
         return lastmove_;
     }
@@ -161,7 +139,7 @@ void Game::DisplayMap()const
         }
         else
         {
-            //cout << map_[i].getPlantName();
+            map_[i].getPlant()->displayinfo();
         }
         cout << endl;
     }
@@ -188,7 +166,7 @@ void Game::PlayerAction()
 {
     if (map_[player_.getPos()].getStood())
     {
-        return;
+        map_[player_.getPos()].getPlant()->doThing( player_ , getPlantList() );
     }
     if (!EnoughMoney())
     {
@@ -200,20 +178,29 @@ void Game::PlayerAction()
     getline(cin,tempstr);
     int choice = Choice(tempstr);
     lastmove_ = choice;
-    if (choice == 4)
+    if (choice == plantTypes_.size() )
     {
         cout << "You give up!" << endl;
         return;
     }
-    
+
     //Plant *newPlant = new Plant(*plantTypes_[choice]);
     //plantlist_.push_back(newPlant);
 
-    map_.put(*plantTypes_[choice], player_.getPos()); // bool
+    map_.put( *(plantTypes_[choice]), player_.getPos()); // bool
     cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
+
+    map_[0].getPlant()->display() ;
 }
 
-void Game::PlantAction()
+vector<Plant*> Game::getPlantList()
 {
-    
+    vector<Plant*> plantlist ;
+
+    for( int i = 0 ; i < numOfLand_ ; i+=1 ){
+        plantlist.push_back(map_[i].getPlant()) ;
+    }
+    return plantlist ;
 }
+
+

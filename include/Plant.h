@@ -31,7 +31,7 @@ public:
     Plant& operator -=(int hurt){
         hp_-=hurt;
         return *this;
-        } //operator
+    } //operator
     Plant& operator +=(int heal)
     {
         hp_+=heal;
@@ -39,11 +39,19 @@ public:
             hp_=fullhp_;
         return *this;
     }
+    Plant& operator = ( const Plant& plant )
+    {
+        name_ = plant.name_ ;
+        cost_ = plant.cost_ ;
+        fullhp_ = plant.fullhp_ ;
+        hp_ = plant.hp_ ;
+        return *this ;
+    }
 
 
     virtual void display() const ;
     virtual void displayinfo() const;
-    virtual int doThing(Player& py , std::vector<Plant*>& plantlist) ;     // Player on plant
+    virtual int doThing(Player& py , std::vector<Plant*> plantlist) ;     // Player on plant
     virtual int beAttacked(Zombie& zb) ;  // Zombie on plant
 
 protected:
@@ -61,9 +69,18 @@ public:
     CoinPlant( const std::string& name, int cost, int fullhp, int round, int coin );
     CoinPlant(const CoinPlant &coinplant);
 
+    CoinPlant& operator = ( const CoinPlant& plant )
+    {
+        Plant::operator=(plant) ;
+        round_ = plant.round_ ;
+        coin_ = plant.coin_ ;
+        visited_ = plant.visited_ ;
+        return *this ;
+    }
+
     virtual void display()const ;
     virtual void displayinfo()const;
-    virtual int doThing(Player& py , std::vector<Plant*>& plantlist) ;
+    virtual int doThing(Player& py , std::vector<Plant*> plantlist) ;
     virtual int beAttacked(Zombie& zb) ;
 
 private:
@@ -80,6 +97,13 @@ public:
     BombPlant( const std::string& name, int cost, int fullhp );
     BombPlant(const BombPlant &bombplant);
 
+    BombPlant& operator = ( const BombPlant& plant )
+    {
+        Plant::operator=(plant) ;
+        damage_ = plant.damage_ ;
+        return *this ;
+    }
+
     virtual void display()const ;
     virtual int beAttacked(Zombie& zb) ;
 
@@ -95,8 +119,15 @@ public:
 	HealPlant(const std::string& name, int cost, int fullhp, int heal);
 	HealPlant(const HealPlant &healplant);
 
+    HealPlant& operator = ( const HealPlant& plant )
+    {
+        Plant::operator=(plant) ;
+        heal_ = plant.heal_ ;
+        return *this ;
+    }
+
     virtual void display()const ;
-    virtual int doThing(Player& py , std::vector<Plant*>& plantlist) ;
+    virtual int doThing(Player& py , std::vector<Plant*> plantlist) ;
     virtual int beAttacked(Zombie& zb) ;
 
 private:
@@ -110,6 +141,13 @@ public:
     ShotPlant()=default;
     ShotPlant(const std::string& name, int cost, int fullhp, int damage);
     ShotPlant(const ShotPlant &shotplant);
+
+    ShotPlant& operator = ( const ShotPlant& plant )
+    {
+        Plant::operator=(plant) ;
+        damage_ = plant.damage_ ;
+        return *this ;
+    }
 
     virtual void display()const ;
     virtual int beAttacked(Zombie& zb) ;

@@ -1,13 +1,17 @@
 #include "Map.h"
+#include <iostream>
 #include<assert.h>
 
-bool Land::put(Plant & plant)
+bool Land::put( const Plant& plant)
 {
-	if(isStood_)
-		 return false;
+	if(isStood_) return false;
 
-	plant_ = new Plant(plant);
+	plant_ = new Plant*();
+    *plant_ = plant ;
 	isStood_ = true;
+
+    plant_->displayinfo();
+
 	return true;
 }
 

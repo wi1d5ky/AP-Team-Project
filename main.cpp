@@ -1,8 +1,8 @@
-#define TESTMODE 1
-
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include "Player.h"
 #include "Zombie.h"
@@ -11,19 +11,6 @@
 
 using namespace std;
 
-#if TESTMODE
-
-constexpr static int MAX = 10;// lands and zombies
-
-int ReadChoice(string input)
-{
-    int choice = atoi(input.c_str());
-    if (choice < 1 || choice > MAX)
-    {
-        return -1;
-    }
-    return choice;
-}
 
 void DisplayBar()
 {
@@ -40,10 +27,11 @@ void Wait()
 
 void Clear()
 {
-    for (int i=0; i<50; i++)
-    {
-        cout << endl;
-    }
+//    for (int i=0; i<50; i++)
+//    {
+//        cout << endl;
+//    }
+    system("cls");
 }
 
 void DisplayRule()
@@ -76,46 +64,46 @@ void DisplayLose()
 
 int main()
 {
-    srand(static_cast<unsigned>(time(0)));
+    srand(time(NULL));
 
     cout << "-----------------------------" << endl
          << "|     Plants vs. Zombies     |" << endl
          << "-----------------------------" << endl ;
     cout << "Number of lands on the map (1-10, default:8)...>";
-    string landstr,zombiestr;
-    getline(cin,landstr);
-    int numOfLands = ReadChoice(landstr);
-    if (numOfLands == -1)
-    {
-        numOfLands = 8;
-    }
-    cout << "Number of zombies on the map (1-10, default:3)...>";
-    getline(cin,zombiestr);
-    int numOfZombies = ReadChoice(zombiestr);
-    if (numOfZombies == -1)
-    {
-        numOfZombies = 3;
-    }
-    Game game(numOfLands,numOfZombies);
 
-    game.InitPlants();
+    char c ;
+    int zombienum = 0 , landnum = 0 ;
+    while( c = getchar() , c != '\n' ) {
+        landnum *= 10 ;
+        landnum += (c-'0') ;
+    }
+    if( !landnum ) landnum = Game::defaultLand ;
+
+    cout << "Number of zombies on the map (1-10, default:3)...>";
+    while( c = getchar() , c != '\n' ) {
+        zombienum *= 10 ;
+        zombienum += (c-'0') ;
+    }
+    if( !zombienum ) zombienum = Game::defaultZombie ;
+
+
+    Game game(landnum,zombienum);
     DisplayRule();
 
-    game.DisplayMap();
-    DisplayBar();
-    game.DisplayZombieInfo();
-    DisplayBar();
-    game.DisplayOfPlant();
 
-    cout << endl;
-    game.PlayerAction();
-    Wait();
-    Clear();
+    while(true)
+    {
+        game.DisplayMap();
+        DisplayBar();
+        game.DisplayZombieInfo();
+        DisplayBar();
+        game.DisplayOfPlant();
 
-    game.DisplayMap();
-    DisplayBar();
-    game.DisplayZombieInfo();
-    DisplayBar();
+        cout << endl;
+        game.PlayerAction();
+        Wait();
+        Clear();
+    }
 
 
     /*
@@ -198,10 +186,4 @@ int main()
 	return 0;
 }
 
-#else
-int main( int argc , char* argv[] )
-{
-	cout << "Hello, world." << endl ;
-	return 0 ;
-}
-#endif // TESTMODE
+
