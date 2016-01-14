@@ -8,9 +8,10 @@ class Land
 {
 	public:
 		~Land();
-		const std::string getPlantName() const { return isStood_? plant_->getName() : "Empty"; }
 		bool put(Plant & plant);
-        bool getStood()const{return isStood_;}
+		bool getStood()const{return isStood_;}
+		Plant & getPlant() { return *plant_; }
+		const Plant & getPlant() const { return *plant_; }
 
 	private:
 		Plant * plant_ = nullptr;
