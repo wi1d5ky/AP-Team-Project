@@ -11,7 +11,7 @@ class Zombie
 		int hurt(int cost) { return hp_ -= cost; }
 		int getPos()const { return position_; }
 		void setPos(int i) { position_ = i; }
-		int attack() { return power_; }
+		int attack()const { return power_; }
 		bool isDied(){ return hp_ <= 0 ;}
 
 	private:
