@@ -70,7 +70,7 @@ class BombPlant:public Plant{
 
 public:
     BombPlant()=default;
-    BombPlant( std::string name, int cost, int fullhp );
+    BombPlant(std::string name, int cost, int fullhp );
 
     virtual void display()const ;
     virtual Effect doThing() ;
@@ -82,7 +82,7 @@ class HealPlant:public Plant{
 
 public:
     HealPlant()=default;
-	HealPlant(std::string name, int cost, int fullhp);
+	HealPlant(std::string name, int cost, int fullhp, int heal);
 
     virtual void display()const ;
     virtual Effect doThing() ;
@@ -97,7 +97,7 @@ class ShotPlant:public Plant{
 
 public:
     ShotPlant()=default;
-    ShotPlant(std::string name, int cost, int fullhp);
+    ShotPlant(std::string name, int cost, int fullhp, int damage);
 
     virtual void display()const ;
     virtual Effect doThing() ;

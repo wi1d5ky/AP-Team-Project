@@ -11,13 +11,13 @@ class Game
 public:
     Game(int numOfLand = 8, int numOfZombie = 3) :map_(numOfLand),numOfZombie_(numOfZombie), numOfLand_(numOfLand) {};
 
-    void StartMenu();
+    void StartMenu()const;
     void InitZombie();
     bool InitPlants();
-    void DisplayOfPlant();
+    void DisplayOfPlant()const;
 
 private:
-    static std::vector<Plant*> plantTypes_;
+    static std::vector<Plant> plantTypes_;
 
     Map map_;
     int numOfZombie_ = 3;
@@ -25,7 +25,7 @@ private:
 
     Player player_;
 
-    std::vector<Zombie*> zombies_;
+    std::vector<Zombie> zombies_;
 };
 
 #endif // GAME_H

@@ -6,7 +6,9 @@
 
 using namespace std;
 
-void Game::StartMenu()
+vector<Plant> Game::plantTypes_;
+
+void Game::StartMenu()const
 {
     cout << "-----------------------------" << endl
          << "|     Plants vs. Zombies    |" << endl
@@ -38,10 +40,10 @@ bool Game::InitPlants() // process file plants.txt
             cost_str.erase(cost_str.begin()+0);// erase $ symbol
             cost = atoi(cost_str.c_str());// change 100 to int
             f >> fullHP;
-            int happen,getmoney;
-            f >> happen;
+            int round,getmoney;
+            f >> round;
             f >> getmoney;
-            CoinPlant *plant = new CoinPlant(cost,fullHP,name,happen,getmoney);
+            CoinPlant plant(name,cost,fullHP,round,getmoney);
             plantTypes_.push_back(plant);
         }
         else if(input == "S")//horn plant or shoot plant
@@ -53,7 +55,7 @@ bool Game::InitPlants() // process file plants.txt
             f >> fullHP;
             int damage;
             f >> damage;
-            ShotPlant *plant = new ShotPlant(cost,fullHP,name,damage);
+            ShotPlant plant(name,cost,fullHP,damage);
             plantTypes_.push_back(plant);
         }
         else if(input == "B")//bomb plant
@@ -63,7 +65,7 @@ bool Game::InitPlants() // process file plants.txt
             cost_str.erase(cost_str.begin()+0);// erase $ symbol
             cost = atoi(cost_str.c_str());// change 100 to int
             f >> fullHP;
-            BombPlant *plant = new BombPlant(cost,fullHP,name);
+            BombPlant plant(name,cost,fullHP);
             plantTypes_.push_back(plant);
         }
         else if(input == "H")//heal plant
@@ -75,7 +77,7 @@ bool Game::InitPlants() // process file plants.txt
             f >> fullHP;
             int heal;
             f >> heal;
-            HealPlant *plant = new HealPlant(cost,fullHP,name,heal);
+            HealPlant plant(name,cost,fullHP,heal);
             plantTypes_.push_back(plant);
         }
         else
@@ -88,12 +90,13 @@ bool Game::InitPlants() // process file plants.txt
     return true;
 }
 
-vector<Plant*> Game::plantTypes_;
-void Game::DisplayOfPlant()
+void Game::DisplayOfPlant()const
 {
     for (unsigned int i=0; i < plantTypes_.size(); i+=1)
     {
-        cout << "[" << to_string(i) << "] " << plantTypes_[i]->getName() << " $" << plantTypes_[i]->cost() << " HP: " << plantTypes_[i]->getFullHP() << " - " << plantTypes_[i]->display() << endl;
+        cout << "[" << i << "] ";
+        plantTypes_[i].display();
+        cout << endl;
     }
 }
 
@@ -102,6 +105,6 @@ void Game::InitZombie()
     for (int i=0; i < numOfZombie_; i+=1)
     {
         int pos = rand()%numOfLand_;
-        zombies_[i] = new Zombie(pos);
+        zombies_[i] = Zombie(pos);
     }
 }

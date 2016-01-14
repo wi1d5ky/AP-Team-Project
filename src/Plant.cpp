@@ -8,15 +8,15 @@ Plant::Plant(string name, int cost, int fullhp)
 CoinPlant::CoinPlant(string name, int cost, int fullhp, int round, int coin)
     :Plant(name, cost, fullhp) ,round_(round), coin_(coin){}
 
-void CoinPlant::display(){
+void CoinPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
         << " - gives $" << coin_ << " every " << round_ << " rounds" << endl ;
 }
 
-BombPlant( std::string name, int cost, int fullhp, int damage )
-	:Plant(name, cost, fullhp), damage_(fullhp){}
+BombPlant(string name, int cost, int fullhp, int damage )
+:Plant(name, cost, fullhp), damage_(fullhp){}
 
-void BombPlant::display(){
+void BombPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
             << " - gives" << damage_ << " damage points" << endl ;
 }
@@ -24,7 +24,7 @@ void BombPlant::display(){
 HealPlant::HealPlant( std::string name, int cost, int fullhp, int heal)
 	:Plant(name, cost, fullhp),heal_(heal){}
 
-void HealPlant::display(){
+void HealPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
             << " - gives all your plants " << heal_ << " HP back" << endl ;
 }
@@ -32,7 +32,7 @@ void HealPlant::display(){
 ShotPlant::ShotPlant(std::string name, int cost, int fullhp, int damage)
 	:Plant(name, cost, fullhp),damage_(damage){}
 
-void ShotPlant::display(){
+void ShotPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
             << " - gives" << damage_ << " damage points" << endl ;
 }
