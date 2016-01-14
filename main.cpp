@@ -106,11 +106,7 @@ int main()
     game.DisplayZombieInfo();
     DisplayBar();
     game.DisplayOfPlant();
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> add Plant displayinfo()
     cout << endl;
     game.PlayerAction();
     Wait();
