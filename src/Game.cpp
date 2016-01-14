@@ -149,7 +149,7 @@ int Game::InitZombiePos()const
 void Game::MinPriceOfPlant()
 {
     min_price_ = INT32_MAX;
-    for (int i=0; i<plantTypes_.size(); i+=1)
+    for (unsigned int i=0; i<plantTypes_.size(); i+=1)
     {
         if (min_price_ > plantTypes_[i]->getCost())
         {
@@ -177,7 +177,7 @@ void Game::Clear()const
 int Game::Choice(char input)
 {
     int choice = atoi(&input);
-    if (choice < 1 || choice > plantTypes_.size())
+    if (choice < 1 || choice > (int) plantTypes_.size())
     {
         return lastmove_;
     }
@@ -225,7 +225,7 @@ void Game::DisplayMap()const
         {
             cout << " ";
         }
-        
+
         for (int j=0; j<remainZombie_; j+=1)
         {
             if (zombies_[j]->getPos() == i)
@@ -244,7 +244,7 @@ void Game::DisplayMap()const
         }
         else
         {
-            
+
         }
         cout << endl;
     }
@@ -252,7 +252,7 @@ void Game::DisplayMap()const
     cout << "Zombie information:" << endl;
     for (int i=0; i<numOfZombie_; i+=1)
     {
-        cout << "[" << i << "] Damage: " << zombies_[i]->attack() << " HP:";
+        cout << "[" << i << "] Damage: " << zombies_[i]->getAttack() << " HP:";
         //zombie.display
         cout << endl;
     }
