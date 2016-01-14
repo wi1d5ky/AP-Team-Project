@@ -34,7 +34,7 @@ class Map
 		Land operator[] (int i) { return lands_[i]; }
 		const Land operator[] (int i) const { return lands_[i]; }
 
-		int size() { return lands_.size(); }
+		size_t size() { return lands_.size(); }
 		bool put(Plant & plant, int position) { return lands_[position].put(plant); }
 
 	private:
