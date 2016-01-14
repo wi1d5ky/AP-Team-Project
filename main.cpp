@@ -105,6 +105,7 @@ int main()
     DisplayBar();
     game.DisplayZombieInfo();
     DisplayBar();
+    game.DisplayOfPlant();
     
     cout << endl;
     game.PlayerAction();

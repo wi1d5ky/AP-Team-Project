@@ -117,7 +117,6 @@ void Game::MinPriceOfPlant()
             min_price_ = plantTypes_[i]->getCost();
         }
     }
-    //return min_price_;
 }
 
 int Game::Choice(string input)
@@ -128,31 +127,6 @@ int Game::Choice(string input)
         return lastmove_;
     }
     return choice;
-}
-
-void Game::PlayerAction()
-{
-    if (map_[player_.getPos()].getStood())
-    {
-        return;
-    }
-    if (!EnoughMoney())
-    {
-        cout << "You do not have enough money to plant anything!" << endl;
-        return;
-    }
-    cout << "Player $" << player_.currentMoney() << ":    Enter your choice (4 to give up, default: " << lastmove_ << ")...>";
-    string tempstr;
-    getline(cin,tempstr);
-    int choice = Choice(tempstr);
-    lastmove_ = choice;
-    if (choice == 4)
-    {
-        cout << "You give up!" << endl;
-        return;
-    }
-    map_.put(*plantTypes_[choice], player_.getPos()); // bool
-    cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
 }
 
 void Game::DisplayMap()const
@@ -202,4 +176,44 @@ void Game::DisplayZombieInfo()const
         zombies_[i]->display();
         cout << endl;
     }
+}
+
+int Game::Move(int max)
+{
+    int move = rand()%max;
+    return move;
+}
+
+void Game::PlayerAction()
+{
+    if (map_[player_.getPos()].getStood())
+    {
+        return;
+    }
+    if (!EnoughMoney())
+    {
+        cout << "You do not have enough money to plant anything!" << endl;
+        return;
+    }
+    cout << "Player $" << player_.currentMoney() << ":    Enter your choice (4 to give up, default: " << lastmove_ << ")...>";
+    string tempstr;
+    getline(cin,tempstr);
+    int choice = Choice(tempstr);
+    lastmove_ = choice;
+    if (choice == 4)
+    {
+        cout << "You give up!" << endl;
+        return;
+    }
+    
+    //Plant *newPlant = new Plant(*plantTypes_[choice]);
+    //plantlist_.push_back(newPlant);
+
+    map_.put(*plantTypes_[choice], player_.getPos()); // bool
+    cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
+}
+
+void Game::PlantAction()
+{
+    
 }

@@ -21,7 +21,8 @@ public:
     void PlantAction();
     void ZombieAction();
 
-    int Walk();
+    int Move(int max);
+
 
 
 
@@ -42,6 +43,8 @@ private:
 
     std::vector<Zombie*> zombies_;
 
+    std::vector<Plant*> plantlist_;
+    
     int Choice(std::string input);
     void MinPriceOfPlant();
     bool EnoughMoney(){return player_.currentMoney() > min_price_;}
