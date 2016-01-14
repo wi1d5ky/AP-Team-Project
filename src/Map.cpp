@@ -2,15 +2,12 @@
 #include <iostream>
 #include<assert.h>
 
-bool Land::put( const Plant& plant)
+bool Land::put( const Plant* plant)
 {
 	if(isStood_) return false;
 
-	plant_ = new Plant*();
-    *plant_ = plant ;
+	plant_ = plant_ ;
 	isStood_ = true;
-
-    plant_->displayinfo();
 
 	return true;
 }

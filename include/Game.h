@@ -49,6 +49,7 @@ private:
     bool EnoughMoney(){return player_.currentMoney() > min_price_;}
     int RandZombiePos()const;
     std::vector<Plant*> getPlantList() ;
+    Plant* prototype( int idx ) ;
 };
 
 #endif // GAME_H

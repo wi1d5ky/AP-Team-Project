@@ -7,7 +7,8 @@ using namespace std;
 
 Game::Game(int numOfLand , int numOfZombie ) :map_(numOfLand),numOfZombie_(numOfZombie), numOfLand_(numOfLand)
 {
-    for (int i=0; i<numOfZombie_; i+=1){
+    for (int i=0; i<numOfZombie_; i+=1)
+    {
         Zombie *temp = new Zombie(RandZombiePos());
         zombies_.push_back(temp);
     }
@@ -18,7 +19,8 @@ bool Game::InitPlants() // process file plants.txt
 {
     fstream f("plants.txt");
 
-    if (!f){
+    if (!f)
+    {
         cout << "Can't find plants.txt!" << endl;
         return false;
     }
@@ -187,20 +189,50 @@ void Game::PlayerAction()
     //Plant *newPlant = new Plant(*plantTypes_[choice]);
     //plantlist_.push_back(newPlant);
 
-    map_.put( *(plantTypes_[choice]), player_.getPos()); // bool
+    map_.put( prototype(choice), player_.getPos()); // bool
     cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
 
-    map_[0].getPlant()->display() ;
 }
 
 vector<Plant*> Game::getPlantList()
 {
     vector<Plant*> plantlist ;
 
-    for( int i = 0 ; i < numOfLand_ ; i+=1 ){
+    for( int i = 0 ; i < numOfLand_ ; i+=1 )
+    {
         plantlist.push_back(map_[i].getPlant()) ;
     }
     return plantlist ;
 }
 
+Plant* Game::prototype( int idx )
+{
+    fstream f("plants.txt");
+
+    string tmp ;
+    for( int i = 0 ; i < idx ; i+=1 )
+        getline(f,tmp);
+    char input ;
+    f >> input ;
+
+    Plant* ptmp ;
+
+    if (input == 'C')//coin plant
+    {
+        ptmp = new CoinPlant( *dynamic_cast<CoinPlant*>(plantTypes_[idx]) );
+    }
+    else if(input == 'S')//horn plant or shoot plant
+    {
+        ptmp = new ShotPlant(*dynamic_cast<ShotPlant*>(plantTypes_[idx])) ;
+    }
+    else if(input == 'B')//bomb plant
+    {
+        ptmp = new BombPlant(*dynamic_cast<BombPlant*>(plantTypes_[idx])) ;
+    }
+    else if(input == 'H')//heal plant
+    {
+        ptmp = new HealPlant(*dynamic_cast<HealPlant*>(plantTypes_[idx])) ;
+    }
+    return ptmp ;
+}
 

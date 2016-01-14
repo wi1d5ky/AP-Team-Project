@@ -48,7 +48,6 @@ public:
         return *this ;
     }
 
-
     virtual void display() const ;
     virtual void displayinfo() const;
     virtual int doThing(Player& py , std::vector<Plant*> plantlist) ;     // Player on plant
