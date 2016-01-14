@@ -7,9 +7,6 @@ using namespace std ;
 Plant::Plant(string name, int cost, int fullhp)
 	:name_(name),cost_(cost),fullhp_(fullhp),hp_(fullhp){}
 
-/* doThing() return heal point */
-/* beAttacked() return whether plant is alive after attack of zombie */
-
 //Copy Constructor
 Plant::Plant(const Plant &plant)
 {
@@ -18,6 +15,9 @@ Plant::Plant(const Plant &plant)
     this->fullhp_ = plant.fullhp_;
     this->hp_ = plant.hp_;
 }
+
+/* doThing() return heal point */
+/* beAttacked() return whether plant is alive after attack of zombie */
 
 void Plant::display() const {}
 int Plant::doThing(Player& py) { return 0 ;}     // Player on plant
@@ -41,13 +41,13 @@ void CoinPlant::display()const{
 
 int CoinPlant::doThing(Player& py) {
     if( ++visited_ >= round_ ){
-        py.trade( coin_ ) ;
+        py += coin_  ;
         visited_ = 0 ;
     }
     return 0 ;
 }
 int CoinPlant::beAttacked(Zombie& zb) {
-    hp_ -= zb.attack() ;
+    hp_ -= zb.getAttack() ;
     if( hp_ <= 0 ){         // Plant is died
         hp_ = 0 ;
         return 0 ;
@@ -74,7 +74,7 @@ int BombPlant::doThing(Player& py) {
 }
 int BombPlant::beAttacked(Zombie& zb) {
     hp_ = 0 ;
-    zb.hurt(damage_) ;
+    zb -= damage_ ;
 
     return 0 ;              // Always die
 }
@@ -96,7 +96,7 @@ int HealPlant::doThing(Player& py) {
     return heal_ ;
 }
 int HealPlant::beAttacked(Zombie& zb) {
-    hp_ -= zb.attack() ;
+    hp_ -= zb.getAttack() ;
     if( hp_ <= 0 ) return 0 ;
     else return 1 ;
 }
@@ -118,10 +118,10 @@ int ShotPlant::doThing(Player& py) {
     return 0 ;
 }
 int ShotPlant::beAttacked(Zombie& zb) {
-    zb.hurt(damage_) ;
+    zb -= damage_ ;
     if( zb.isDied() ) return 1 ;
 
-    hp_ -= zb.attack() ;
+    hp_ -= zb.getAttack() ;
     if( hp_ <= 0 ) return 0 ;
     else return 1 ;
 }

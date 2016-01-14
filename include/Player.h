@@ -9,10 +9,19 @@ class Player
 
 		// change > 0 ==> earn ; change < 0 ==> spend
 		// return value ==> trade success or not
-		bool trade(int change);
 		int currentMoney() { return money_; };
 		int getPos()const { return position_; }
 		void setPos(int pos) { position_ = pos; };
+
+		Player& operator += ( int money ){
+            money_ += money ;
+            return *this ;
+		}
+        Player& operator -= ( int money ){
+            if( money_ >= money )
+                money_ -= money ;
+            return *this ;
+		}
 
 	private:
 		constexpr static int default_money = 150;
