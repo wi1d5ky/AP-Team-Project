@@ -11,25 +11,18 @@ class Game
 public:
     Game(int numOfLand, int numOfZombie);
 
-    void DisplayBar()const;
-    void DisplayRule()const;
     void DisplayOfPlant()const;
+    void DisplayMap()const;
+    void DisplayZombieInfo()const;
     
-    void DisplayWin()const;
-    void DisplayLose()const;
-    void Wait()const;
-    void Clear()const;
-    
-    int InitZombiePos()const;
     bool InitPlants();
     
-    void MinPriceOfPlant();
-    bool EnoughMoney(){return player_.currentMoney() > min_price_;}
+    void PlayerAction();
+    void PlantAction();
+    void ZombieAction();
     
-    void PutMenu();
-    int Choice(char input);
-    
-    void DisplayMap()const;
+    int Walk()
+
 
 
 private:
@@ -48,6 +41,12 @@ private:
     Player player_;
 
     std::vector<Zombie*> zombies_;
+    
+    int Choice(std::string input);
+    void MinPriceOfPlant();
+    bool EnoughMoney(){return player_.currentMoney() > min_price_;}
+    int RandZombiePos()const;
+
 };
 
 #endif // GAME_H

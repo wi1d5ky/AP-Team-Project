@@ -12,47 +12,9 @@ Game::Game(int numOfLand, int numOfZombie) :map_(numOfLand),numOfZombie_(numOfZo
 {
     for (int i=0; i<numOfZombie_; i+=1)
     {
-        Zombie *temp = new Zombie(InitZombiePos());
+        Zombie *temp = new Zombie(RandZombiePos());
         zombies_.push_back(temp);
     }
-}
-
-
-void Game::DisplayBar()const
-{
-    for (int i=0; i<77; i+=1)
-    {
-        cout << "=" ;
-    }
-    cout << endl ;
-}
-
-void Game::DisplayRule()const
-{
-    DisplayBar();
-    cout << "Plants vs. Zombies Rule:" << endl << endl
-         << "How to win:" << endl
-         << "  (1) All zombies are dead." << endl
-         << "  (2) At least one plant is live." << endl
-         << "  (3) The number of dead bomb plants cannot exceed the number of zombies." << endl << endl
-         << "How to lose:" << endl
-         << "  All plants are dead." << endl;
-    DisplayBar();
-    Wait();
-    Clear();
-}
-
-void Game::DisplayWin()const
-{
-    cout << endl << endl << endl << "Congratulations! You have killed all zombies!" << endl;
-    Wait();
-}
-
-void Game::DisplayLose()const
-{
-    cout << endl << endl << endl << "Oh no... You have no plant on the map ...." << endl;
-    Wait();
-
 }
 
 bool Game::InitPlants() // process file plants.txt
@@ -139,10 +101,9 @@ void Game::DisplayOfPlant()const
     }
 }
 
-int Game::InitZombiePos()const
+int Game::RandZombiePos()const
 {
     int pos = rand()%numOfLand_;
-    cout <<pos;
     return pos;
 }
 
@@ -159,24 +120,9 @@ void Game::MinPriceOfPlant()
     //return min_price_;
 }
 
-void Game::Wait()const
+int Game::Choice(string input)
 {
-    cout << "Press any key to continue...";
-    cin.get();
-    cout << endl;
-}
-
-void Game::Clear()const
-{
-    for (int i=0; i<50; i++)
-    {
-        cout << endl;
-    }
-}
-
-int Game::Choice(char input)
-{
-    int choice = atoi(&input);
+    int choice = atoi(input.c_str());
     if (choice < 1 || choice > (int) plantTypes_.size())
     {
         return lastmove_;
@@ -184,32 +130,29 @@ int Game::Choice(char input)
     return choice;
 }
 
-void Game::PutMenu()
+void Game::PlayerAction()
 {
     if (map_[player_.getPos()].getStood())
     {
-        Wait();
         return;
     }
     if (!EnoughMoney())
     {
         cout << "You do not have enough money to plant anything!" << endl;
-        Wait();
         return;
     }
     cout << "Player $" << player_.currentMoney() << ":    Enter your choice (4 to give up, default: " << lastmove_ << ")...>";
-    int choice = Choice(cin.get());
+    string tempstr;
+    getline(cin,tempstr);
+    int choice = Choice(tempstr);
     lastmove_ = choice;
     if (choice == 4)
     {
         cout << "You give up!" << endl;
-        Wait();
         return;
     }
     map_.put(*plantTypes_[choice], player_.getPos()); // bool
     cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
-    Wait();
-    Clear();
 }
 
 void Game::DisplayMap()const
@@ -244,17 +187,19 @@ void Game::DisplayMap()const
         }
         else
         {
-
+            //cout << map_[i].getPlantName();
         }
         cout << endl;
     }
-    DisplayBar();
+}
+
+void Game::DisplayZombieInfo()const
+{
     cout << "Zombie information:" << endl;
     for (int i=0; i<numOfZombie_; i+=1)
     {
         cout << "[" << i << "] Damage: " << zombies_[i]->getAttack() << " HP:";
-        //zombie.display
+        zombies_[i]->display();
         cout << endl;
     }
-    DisplayBar();
 }
