@@ -4,9 +4,9 @@
 #include<string>
 
 struct Effect {
-    int coin   = 0 ,
-        heal   = 0 ,
-        damage = 0 ;
+    int coin_   = 0 ,
+        heal_   = 0 ,
+        damage_ = 0 ;
 };
 
 class Plant{
@@ -75,6 +75,9 @@ public:
     virtual void display()const ;
     virtual Effect doThing() ;
     virtual Effect beAttacked() ;
+
+private:
+    int damage_ = 0 ;
 
 };
 

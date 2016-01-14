@@ -13,7 +13,7 @@ void CoinPlant::display()const{
         << " - gives $" << coin_ << " every " << round_ << " rounds" << endl ;
 }
 
-BombPlant(string name, int cost, int fullhp, int damage )
+BombPlant::BombPlant(string name, int cost, int fullhp )
 :Plant(name, cost, fullhp), damage_(fullhp){}
 
 void BombPlant::display()const{
