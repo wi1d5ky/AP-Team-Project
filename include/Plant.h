@@ -11,6 +11,7 @@ class Plant{
 public:
     Plant()=default;
     Plant( std::string name, int cost, int fullhp );
+    Plant(const Plant &plant);
 
     int getFullHP() const{
         return fullhp_;
@@ -33,6 +34,9 @@ public:
         return hp_ -= hurt;
     }
 
+    void operator -=(int hurt){hp_-=hurt;} //operator
+    void operator +=(int heal){hp_+=heal;}
+
 
     virtual void display() const ;
     virtual int doThing(Player& py) ;     // Player on plant
@@ -51,6 +55,7 @@ class CoinPlant:public Plant{
 public:
     CoinPlant()=default;
     CoinPlant( std::string name, int cost, int fullhp, int round, int coin );
+    CoinPlant(const CoinPlant &coinplant);
 
     virtual void display()const ;
     virtual int doThing(Player& py) ;
@@ -68,6 +73,7 @@ class BombPlant:public Plant{
 public:
     BombPlant()=default;
     BombPlant(std::string name, int cost, int fullhp );
+    BombPlant(const BombPlant &bombplant);
 
     virtual void display()const ;
     virtual int doThing(Player& py) ;
@@ -83,6 +89,7 @@ class HealPlant:public Plant{
 public:
     HealPlant()=default;
 	HealPlant(std::string name, int cost, int fullhp, int heal);
+	HealPlant(const HealPlant &healplant);
 
     virtual void display()const ;
     virtual int doThing(Player& py) ;
@@ -98,6 +105,7 @@ class ShotPlant:public Plant{
 public:
     ShotPlant()=default;
     ShotPlant(std::string name, int cost, int fullhp, int damage);
+    ShotPlant(const ShotPlant &shotplant);
 
     virtual void display()const ;
     virtual int doThing(Player& py) ;
