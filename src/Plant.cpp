@@ -21,7 +21,7 @@ Plant::Plant(const Plant &plant)
 /* beAttacked() return whether plant is alive after attack of zombie */
 
 void Plant::display() const {}
-int Plant::doThing(Player& py , vector<Plant*>& plantlist ) { return 0 ;}     // Player on plant
+int Plant::doThing(Player& py , vector<Plant*>& plantlist ) { return -1 ;}     // Player on plant
 int Plant::beAttacked(Zombie& zb) { return 0 ;}  // Zombie on plant
 
 
@@ -58,7 +58,7 @@ int CoinPlant::beAttacked(Zombie& zb) {
 }
 
 BombPlant::BombPlant(const std::string& name, int cost, int fullhp )
-:Plant(name, cost, fullhp), damage_(fullhp){}
+    :Plant(name, cost, fullhp), damage_(fullhp){}
 
 BombPlant::BombPlant(const BombPlant &bombplant):Plant(bombplant)
 {
@@ -94,7 +94,7 @@ int HealPlant::doThing(Player& py , vector<Plant*>& plantlist) {
     for( auto& plant : plantlist ){
         *plant += heal_ ;
     }
-    return 0 ;
+    return -1 ;
 }
 int HealPlant::beAttacked(Zombie& zb) {
     hp_ -= zb.getAttack() ;
