@@ -3,10 +3,22 @@
 #include <fstream>
 #include "Game.h"
 
-
 using namespace std;
 
+int ReadChoice(char input)
+{
+    int choice = atoi(&input);
+    if (choice < 1 && choice > 10)
+    {
+        return -1;
+    }
+    return choice;
+}
+
+//===================================================
+
 vector<Plant> Game::plantTypes_;
+int Game::min_price_;
 
 void Game::StartMenu()const
 {
@@ -35,8 +47,20 @@ void Game::DisplayRule()const
          << "How to lose:" << endl
          << "  All plants are dead." << endl;
     DisplayBar();
-    cout << "Press any key to continue...";
-    cin.get();
+    Wait();
+}
+
+void Game::DisplayWin()const
+{
+    cout << endl << endl << endl << "Congratulations! You have killed all zombies!" << endl;
+    Wait();
+}
+
+void Game::DisplayLose()const
+{
+    cout << endl << endl << endl << "Oh no... You have no plant on the map ...." << endl;
+    Wait();
+
 }
 
 bool Game::InitPlants() // process file plants.txt
@@ -133,4 +157,45 @@ void Game::InitZombie()
     }
 }
 
+void Game::MinPriceOfPlant()
+{
+    min_price_ = INT32_MAX;
+    for (int i=0; i<plantTypes_.size(); i+=1)
+    {
+        if (min_price_ > plantTypes_[i].getCost())
+        {
+            min_price_ = plantTypes_[i].getCost();
+        }
+    }
+    //return min_price_;
+}
 
+void Game::Wait()const
+{
+    cout << "Press any key to continue...";
+    cin.get();
+    cout << endl;
+}
+
+int Game::Choice(char input)
+{
+    int choice = atoi(&input);
+    if (choice < 1 && choice >= plantTypes_.size())
+    {
+        return -1;
+    }
+    return choice;
+}
+
+void Game::PutMenu()
+{
+    if (!EnoughMoney())
+    {
+        cout << "You do not have enough money to plant anything!" << endl;
+        Wait();
+        return;
+    }
+    cout << "Player $" << player_.currentMoney() << ":    Enter your choice (4 to give up, default:4)...>";
+    int choice = Choice(cin.get());
+
+}

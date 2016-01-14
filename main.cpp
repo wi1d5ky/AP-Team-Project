@@ -13,15 +13,6 @@ using namespace std;
 
 #if TESTMODE
 
-int ReadChoice(char input[])
-{
-    int choice = atoi(input);
-    if (input[0] == '\n')
-    {
-        return -1;
-    }
-    return choice;
-}
 
 int main()
 {
