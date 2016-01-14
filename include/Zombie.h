@@ -1,6 +1,9 @@
 #ifndef ZOMBIE_H
 #define ZOMBIE_H
 
+#include <iostream>
+#include <cstring>
+
 class Zombie
 {
 	public:
@@ -12,6 +15,7 @@ class Zombie
         int getAttack()const { return power_; }
 		void setPos(int i) { position_ = i; }
 		bool isDied(){ return hp_ <= 0 ;}
+        void display()const { std::cout << std::string(hp_, '*'); };
 
 		Zombie& operator += ( int life ){
             hp_ += life ;

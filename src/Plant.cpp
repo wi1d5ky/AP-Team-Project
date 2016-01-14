@@ -65,7 +65,7 @@ BombPlant::BombPlant(const BombPlant &bombplant):Plant(bombplant)
 
 void BombPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
-            << " - gives" << damage_ << " damage points" << endl ;
+            << " - gives " << damage_ << " damage points" << endl ;
 }
 
 int BombPlant::doThing(Player& py) {
@@ -89,7 +89,7 @@ HealPlant::HealPlant(const HealPlant &healplant):Plant(healplant)
 
 void HealPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
-            << " - gives all your plants " << heal_ << " HP back" << endl ;
+            << " - gives all your plants " << heal_ << " HP back." << endl ;
 }
 
 int HealPlant::doThing(Player& py) {
@@ -110,7 +110,7 @@ ShotPlant::ShotPlant(const ShotPlant &shotplant):Plant(shotplant)
 }
 void ShotPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
-            << " - gives" << damage_ << " damage points" << endl ;
+            << " - gives " << damage_ << " damage points" << endl ;
 }
 
 int ShotPlant::doThing(Player& py) {
