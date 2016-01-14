@@ -71,13 +71,13 @@ void DisplayLose()
 {
     cout << endl << endl << endl << "Oh no... You have no plant on the map ...." << endl;
     Wait();
-    
+
 }
 
 int main()
 {
     srand(static_cast<unsigned>(time(0)));
-    
+
     cout << "-----------------------------" << endl
          << "|     Plants vs. Zombies     |" << endl
          << "-----------------------------" << endl ;
@@ -100,23 +100,27 @@ int main()
 
     game.InitPlants();
     DisplayRule();
-    
+
     game.DisplayMap();
     DisplayBar();
     game.DisplayZombieInfo();
     DisplayBar();
     game.DisplayOfPlant();
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> add Plant displayinfo()
     cout << endl;
     game.PlayerAction();
     Wait();
     Clear();
-    
+
     game.DisplayMap();
     DisplayBar();
     game.DisplayZombieInfo();
     DisplayBar();
-    
+
 
     /*
     int land_num = 8;
