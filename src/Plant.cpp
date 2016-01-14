@@ -76,7 +76,8 @@ void HealPlant::display()const{
 
 int HealPlant::doThing(Player& py , vector<Plant*>& plantlist) {
     for( auto& plant : plantlist ){
-        *plant += heal_ ;
+        if( plant != nullptr )
+            *plant += heal_ ;
     }
     return -1 ;
 }
