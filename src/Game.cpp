@@ -196,7 +196,7 @@ void Game::PlayerAction()
 
     if(map_.put( plantTypes_[choice]->clone() , player_.getPos()) )// bool
     {
-        //player_ -= plantTypes_[choice]->getCost(); //扣錢
+        player_ -= plantTypes_[choice]->getCost(); //扣錢
         cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
     }
 }
