@@ -12,7 +12,6 @@ class Plant{
 public:
     Plant()=default;
     Plant( const std::string& name, int cost, int fullhp );
-    Plant( const Plant &plant );
 
     int getFullHP() const{
         return fullhp_;
@@ -39,14 +38,6 @@ public:
             hp_=fullhp_;
         return *this;
     }
-    Plant& operator = ( const Plant& plant )
-    {
-        name_ = plant.name_ ;
-        cost_ = plant.cost_ ;
-        fullhp_ = plant.fullhp_ ;
-        hp_ = plant.hp_ ;
-        return *this ;
-    }
 
     virtual Plant* clone() const ;
     virtual void display() const ;
@@ -67,16 +58,6 @@ class CoinPlant:public Plant{
 public:
     CoinPlant()=default;
     CoinPlant( const std::string& name, int cost, int fullhp, int round, int coin );
-    CoinPlant(const CoinPlant &coinplant);
-
-    CoinPlant& operator = ( const CoinPlant& plant )
-    {
-        Plant::operator=(plant) ;
-        round_ = plant.round_ ;
-        coin_ = plant.coin_ ;
-        visited_ = plant.visited_ ;
-        return *this ;
-    }
 
     virtual Plant* clone() const;
     virtual void display()const ;
@@ -96,14 +77,6 @@ class BombPlant:public Plant{
 public:
     BombPlant()=default;
     BombPlant( const std::string& name, int cost, int fullhp );
-    BombPlant(const BombPlant &bombplant);
-
-    BombPlant& operator = ( const BombPlant& plant )
-    {
-        Plant::operator=(plant) ;
-        damage_ = plant.damage_ ;
-        return *this ;
-    }
 
     virtual Plant* clone() const;
     virtual void display()const ;
@@ -121,13 +94,6 @@ public:
 	HealPlant(const std::string& name, int cost, int fullhp, int heal);
 	HealPlant(const HealPlant &healplant);
 
-    HealPlant& operator = ( const HealPlant& plant )
-    {
-        Plant::operator=(plant) ;
-        heal_ = plant.heal_ ;
-        return *this ;
-    }
-
     virtual Plant* clone() const;
     virtual void display()const ;
     virtual int doThing(Player& py , std::vector<Plant*> plantlist) ;
@@ -143,14 +109,6 @@ class ShotPlant:public Plant{
 public:
     ShotPlant()=default;
     ShotPlant(const std::string& name, int cost, int fullhp, int damage);
-    ShotPlant(const ShotPlant &shotplant);
-
-    ShotPlant& operator = ( const ShotPlant& plant )
-    {
-        Plant::operator=(plant) ;
-        damage_ = plant.damage_ ;
-        return *this ;
-    }
 
     virtual Plant* clone() const;
     virtual void display()const ;
