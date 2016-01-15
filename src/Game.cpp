@@ -231,7 +231,17 @@ void Game::ZombieAction()
     {
 
         int ZcurrentPos = zombies_[i]->getPos();
-        zombies_[i]->setPos((ZcurrentPos+Move(Zombie::step_))%numOfLand_);
+        int ZPos = (ZcurrentPos+Move(Zombie::step_))%numOfLand_;
+        zombies_[i]->setPos(ZPos);
+        
+        DisplayMap();
+        cout << string(50,'-') << endl;//bar
+        DisplayZombieInfo();
+        cout << string(50,'=') << endl;
+        cout << "Zombie [" << i << "] moves to land " << ZPos << "." << endl;
+        system("pause");
+        system("cls");
+        
         if(map_[zombies_[i]->getPos()].getStood() && ! map_[zombies_[i]->getPos()].getPlant()->beAttacked(*zombies_[i]) )
         {
             map_[zombies_[i]->getPos()].recycle();

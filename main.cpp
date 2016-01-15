@@ -20,7 +20,7 @@ void Clear(){
 #ifdef _WIN32
     system( "cls" ) ;
 #else
-    system( "clear" ) ;
+    cout << string(50,'\n') ;
 #endif
 }
 
@@ -85,11 +85,14 @@ int main()
         game.DisplayOfPlant();
 
         cout << endl;
-        game.PlayerAction();
+        game.PlayerAction();//judge win/lose next line
         Wait();
         Clear();
 
         game.ZombieAction();
+        
+        //Wait();
+        Clear();
 
         game.NextStep();
 
