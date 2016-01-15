@@ -175,6 +175,11 @@ void Game::PlayerAction()
         cout << "You do not have enough money to plant anything!" << endl;
         return;
     }
+    if (map_[player_.getPos()].getStood())
+    {
+        cout << "Already planted!" << endl;
+        return;
+    }
     cout << "Player $" << player_.currentMoney() << ":    Enter your choice (4 to give up, default: " << lastmove_ << ")...>";
     string tempstr;
     getline(cin,tempstr);
@@ -189,8 +194,11 @@ void Game::PlayerAction()
     //Plant *newPlant = new Plant(*plantTypes_[choice]);
     //plantlist_.push_back(newPlant);
 
-    map_.put( prototype(choice), player_.getPos()); // bool
-    cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
+    if(map_.put( prototype(choice), player_.getPos()) )// bool
+    {
+        //player_ -= plantTypes_[choice]->getCost(); //扣錢
+        cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
+    }
 }
 
 vector<Plant*> Game::getPlantList()
@@ -240,3 +248,17 @@ void Game::NextStep()
     size_t currentPos = player_.getPos();
     player_.setPos((Move(6)+currentPos)%numOfLand_);
 }
+
+void Game::PlantAction()
+{
+    for (int i=0; i<numOfLand_; i+=1)
+    {
+        if (map_[i].getStood())
+        {
+            if(map_[i].getPlant()->doThing(player_,getPlantList()) == 0)
+                cout << "You have get coin!" << endl;
+        }
+    }
+}
+
+//void ZombieAction();
