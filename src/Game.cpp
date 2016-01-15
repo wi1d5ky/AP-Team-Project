@@ -9,7 +9,7 @@ Game::Game(int numOfLand , int numOfZombie )
         :map_(numOfLand),numOfZombie_(numOfZombie), numOfLand_(numOfLand) , player_( RandPos(numOfLand) )
 {
     for (int i=0; i<numOfZombie_; i+=1){
-        zombies_.push_back(Zombie(RandPos(numOfLand)));
+        zombies_.push_back(Zombie(RandPos(numOfLand),i));
     }
     InitPlants() ;
 }
@@ -121,7 +121,7 @@ void Game::DisplayMap()const
         {
             if (zombies_[j].getPos() == i)
             {
-                cout << j;
+                cout << zombies_[j].getId() ;
             }
             else
             {
@@ -244,18 +244,30 @@ void Game::ZombieAction()
         DisplayZombieInfo();
         cout << string(50,'=') << endl;
         cout << "Zombie [" << i << "] moves to land " << ZPos << "." << endl;
+
+
+        if( map_[zombies_[i].getPos()].getStood() )
+        {
+            int damage = map_[zombies_[i].getPos()].getPlant()->beAttacked(zombies_[i]) ;
+
+            if( damage > 0 )
+                cout << map_[zombies_[i].getPos()].getPlant()->getName() << " gives "
+                                            <<  damage << " damage to the zombie!" << endl ;
+
+            if (zombies_[i].isDied()){
+                cout << "Zombie is killed!" << endl ;
+                zombies_.erase(zombies_.begin()+i);
+            }
+            else{
+                cout << "Zombie eats plant " << map_[zombies_[i].getPos()].getPlant()->getName()
+                                        << " and causes damage "  << zombies_[i].getAttack() << "." << endl ;
+            }
+
+        }
+        map_[zombies_[i].getPos()].recycle();
+
         system("pause");
         system("cls");
-
-        if(map_[zombies_[i].getPos()].getStood() && ! map_[zombies_[i].getPos()].getPlant()->beAttacked(zombies_[i]) )
-        {
-            map_[zombies_[i].getPos()].recycle();
-        }
-        if (zombies_[i].isDied())
-        {
-            zombies_.erase(zombies_.begin()+i);
-        }
-
     }
 }
 
