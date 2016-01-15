@@ -9,6 +9,7 @@ Game::Game(int numofland , int numofzombie )
         :map_(numofland),numofzombie_(numofzombie), numofland_(numofland) ,player_( RandPos(numofland) )
 {
     if( numofzombie_ > Zombie::maxZombie ) numofzombie_ = Zombie::maxZombie ;
+    else if( numofzombie_ <= 0 ) numofzombie_ = Game::defaultZombie ;
 
     for (int i=0; i<numofzombie_; i+=1){
         zombies_.push_back(Zombie(RandPos(numofland),i));
@@ -20,7 +21,6 @@ Game::~Game(){
         delete pt ;
     }
 }
-
 
 bool Game::InitPlants() // process file plants.txt
 {
@@ -91,8 +91,7 @@ bool Game::InitPlants() // process file plants.txt
 
 void Game::DisplayOfPlant()const
 {
-    for (unsigned int i=0; i < plantTypes_.size(); i+=1)
-    {
+    for (unsigned int i=0; i < plantTypes_.size(); i+=1){
         cout << "[" << i << "] ";
         plantTypes_[i]->display();
     }
@@ -106,38 +105,21 @@ int Game::RandPos( int range )const
 
 void Game::DisplayMap()const
 {
-    for (int i=0; i<numofland_; i+=1)
-    {
+    for (int i=0; i<numofland_; i+=1){
         cout << "[" << i << "]{" ;
-        if (player_.getPos() == i)
-        {
-            cout << "*";
-        }
-        else
-        {
-            cout << " ";
-        }
+        if (player_.getPos() == i) cout << "*";
+        else cout << " ";
 
-        for (int j=0; j<zombies_.size(); j+=1)
-        {
+        for (int j=0; j<zombies_.size(); j+=1){
             if (zombies_[j].getPos() == i)
-            {
                 cout << zombies_[j].getId() ;
-            }
             else
-            {
                 cout << " ";
-            }
         }
         cout << "}";
-        if ( !map_[i].getStood() )
-        {
-            cout << "Empty";
-        }
-        else
-        {
-            map_[i].getPlant()->displayinfo();
-        }
+        if ( !map_[i].getStood() ) cout << "Empty";
+        else map_[i].getPlant()->displayinfo();
+
         cout << endl;
     }
 }
@@ -163,24 +145,21 @@ void Game::PlayerAction()
 {
     static int lastmove_ = plantTypes_.size() ;
 
-    if (map_[player_.getPos()].getStood())
-    {
+    if (map_[player_.getPos()].getStood()){
         if( map_[player_.getPos()].getPlant()->doThing(player_,map_.getPlantList()) == 0)
                 cout << "You have get coin!" << endl;
-    }
-    if ( player_.currentMoney() < min_price_ )
-    {
-        cout << "You do not have enough money to plant anything!" << endl;
-        return;
-    }
-    if (map_[player_.getPos()].getStood())
-    {
+
         cout << "Already planted!" << endl;
         return;
     }
+
+    if ( player_.currentMoney() < min_price_ ){
+        cout << "You do not have enough money to plant anything!" << endl;
+        return;
+    }
+
     cout << "Player $" << player_.currentMoney() << ":    Enter your choice (" << plantTypes_.size()
                                                         << " to give up, default: " << lastmove_ << ")...>";
-
     string tmp;
     getline(cin,tmp);
     int choice = atoi(tmp.c_str());

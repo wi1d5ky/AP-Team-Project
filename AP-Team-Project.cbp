@@ -42,8 +42,6 @@
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/Map.cpp" />
 		<Unit filename="src/Plant.cpp" />
-		<Unit filename="src/Player.cpp" />
-		<Unit filename="src/Zombie.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
