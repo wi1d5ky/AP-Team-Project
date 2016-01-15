@@ -43,16 +43,14 @@ private:
     int remainZombie_ = numOfZombie_;
     int RandPos( int range )const;
     std::vector<Plant*> getPlantList() ;
-    bool lose_ = false;
+    bool lose_ = false ;
+    bool win_ = false ;
 
 
     Player player_;
     Map map_;
     std::vector<Zombie*> zombies_;
     std::vector<Plant*> plantTypes_;
-
-
-
 
 
 };
