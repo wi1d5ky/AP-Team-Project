@@ -9,7 +9,7 @@ class Player
 
 		// change > 0 ==> earn ; change < 0 ==> spend
 		// return value ==> trade success or not
-		int currentMoney() { return money_; };
+		int currentMoney()const { return money_; };
 		int getPos()const { return position_; }
 		void setPos(int pos) { position_ = pos; };
 

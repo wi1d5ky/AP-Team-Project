@@ -13,9 +13,6 @@ public:
     Plant()=default;
     Plant( const std::string& name, int cost, int fullhp );
 
-    int getFullHP() const{
-        return fullhp_;
-    }
     int gethp() const{
         return hp_;
     }
@@ -24,6 +21,9 @@ public:
     }
     const std::string& getName() const{
         return name_ ;
+    }
+    bool isDied() const{
+        return hp_ <= 0 ;
     }
 
 
@@ -34,8 +34,7 @@ public:
     Plant& operator +=(int heal)
     {
         hp_+=heal;
-        if(hp_>fullhp_)
-            hp_=fullhp_;
+        if(hp_>fullhp_) hp_=fullhp_;
         return *this;
     }
 

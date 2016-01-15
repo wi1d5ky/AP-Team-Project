@@ -8,7 +8,7 @@ using namespace std ;
 Plant::Plant(const std::string& name, int cost, int fullhp)
 	:name_(name),cost_(cost),fullhp_(fullhp),hp_(fullhp){}
 
-/* doThing() return heal point */
+/* doThing() return visited time */
 /* beAttacked() return whether plant is alive after attack of zombie */
 
 void Plant::display() const {

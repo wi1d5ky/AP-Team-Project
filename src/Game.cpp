@@ -244,7 +244,11 @@ void Game::ZombieAction()
     }
 }
 
-void Game::WinOrLose()
+bool Game::isWin()
+{
+    return (zombies_.size() == 0 && getPlantList().size()>0 && numOfDeadBomb_ <= numOfZombie_) ;
+}
+bool Game::isLose()
 {
     int alivePlant = 0;
     for (int i=0 ; i< numOfLand_; i+=1)
@@ -254,33 +258,13 @@ void Game::WinOrLose()
             alivePlant++;
         }
     }
-    if (alivePlant == 0)
+    if (!alivePlant)
     {
-        lose_ = true;
+        return true ;
     }
-    if (zombies_.size() == 0 && getPlantList().size()>0 && numOfDeadBomb_ <= numOfZombie_)
-    {
-        win_ = true;
-    }
-    
-    
-    
-    /*
-    int numdeadZombie=0;
-    int numdeadPlant=0;
-    for(int i=0;i<zombies_.size();i++)
-    {
-        if(zombies_[i]->isDied())
-            numdeadZombie++;
-    }
-    if(numdeadZombie==zombies_.size())
-        win_=true;
-    for(int i=0;i<plantTypes_.size();i++)
-    {
-        if(plantTypes_[i]->isDied())
-            numdeadPlant++;
-    }
-    if(numdeadPlant==plantTypes_.size())
-        lose_=true;
-     */
+
+    return false ;
 }
+
+
+

@@ -1,32 +1,22 @@
 #include <iostream>
-#include <algorithm>
-#include <vector>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "Player.h"
-#include "Zombie.h"
-#include "Map.h"
 #include "Game.h"
 
 using namespace std;
 
-
-void DisplayBar()
-{
-    cout << string(77,'=') ;
-    cout << endl ;
+void DisplayBar(){
+    cout << string(77,'=') << endl;
 }
 
-void Wait()
-{
+void Wait(){
     cout << "Press any key to continue...";
     cin.get();
     cout << endl;
 }
 
-void Clear()
-{
+void Clear(){
 #ifdef _WIN32
     system( "cls" ) ;
 #else
@@ -49,17 +39,14 @@ void DisplayRule()
     Clear();
 }
 
-void DisplayWin()
-{
+void DisplayWin(){
     cout << endl << endl << endl << "Congratulations! You have killed all zombies!" << endl;
     Wait();
 }
 
-void DisplayLose()
-{
+void DisplayLose(){
     cout << endl << endl << endl << "Oh no... You have no plant on the map ...." << endl;
-    Wait();
-
+    Wait();     //You lose the game since you cannot use that many bomb plants!
 }
 
 int main()
@@ -90,9 +77,7 @@ int main()
     Game game(landnum,zombienum);
     DisplayRule();
 
-
-    do
-    {
+    do{
         game.DisplayMap();
         DisplayBar();
         game.DisplayZombieInfo();
@@ -107,7 +92,7 @@ int main()
         game.ZombieAction();
 
         game.NextStep();
-        game.WinOrLose();
+
     }while( !game.isLose() && !game.isWin() ) ;
 
     if(game.isWin())
@@ -116,8 +101,6 @@ int main()
     {
         DisplayLose();
     }
-
-
 
 
 	return 0;

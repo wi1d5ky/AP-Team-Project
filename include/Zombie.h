@@ -12,7 +12,7 @@ class Zombie
 		int getPos()const { return position_; }
         int getAttack()const { return power_; }
 		void setPos(int i) { position_ = i; }
-		bool isDied(){ return hp_ <= 0 ;}
+		bool isDied()const { return hp_ <= 0 ;}
         void display()const { std::cout << std::string(hp_, '*'); };
 
 		Zombie& operator += ( int life ){
