@@ -1,4 +1,4 @@
 C CoinPlant $50 75 2 100
-S HornPlant $50 1 10
+S HornPlant $50 100 100
 B BombPlant $100 50
 H HealPlant $50 50 20

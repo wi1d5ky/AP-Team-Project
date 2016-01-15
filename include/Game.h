@@ -10,6 +10,7 @@ class Game
 {
 public:
     Game(int numOfLand , int numOfZombie );
+    ~Game() ;
 
     constexpr static int maxZombie = 10 ;
     constexpr static int maxLand = 10 ;
@@ -38,13 +39,13 @@ private:
     int numOfDeadBomb_ = 0;
     int numOfZombie_ ;
     int numOfLand_ ;
-    int remainZombie_ = numOfZombie_;
+
     int RandPos( int range )const;
     std::vector<Plant*> getPlantList() ;
 
     Player player_;
     Map map_;
-    std::vector<Zombie*> zombies_;
+    std::vector<Zombie> zombies_;
     std::vector<Plant*> plantTypes_;
 
 };

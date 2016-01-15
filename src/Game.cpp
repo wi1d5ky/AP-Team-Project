@@ -8,13 +8,17 @@ using namespace std;
 Game::Game(int numOfLand , int numOfZombie )
         :map_(numOfLand),numOfZombie_(numOfZombie), numOfLand_(numOfLand) , player_( RandPos(numOfLand) )
 {
-    for (int i=0; i<numOfZombie_; i+=1)
-    {
-        Zombie *temp = new Zombie(RandPos(numOfLand));
-        zombies_.push_back(temp);
+    for (int i=0; i<numOfZombie_; i+=1){
+        zombies_.push_back(Zombie(RandPos(numOfLand)));
     }
     InitPlants() ;
 }
+Game::~Game(){
+    for( auto& pt : plantTypes_ ){
+        delete pt ;
+    }
+}
+
 
 bool Game::InitPlants() // process file plants.txt
 {
@@ -115,7 +119,7 @@ void Game::DisplayMap()const
 
         for (int j=0; j<zombies_.size(); j+=1)
         {
-            if (zombies_[j]->getPos() == i)
+            if (zombies_[j].getPos() == i)
             {
                 cout << j;
             }
@@ -142,8 +146,8 @@ void Game::DisplayZombieInfo()const
     cout << "Zombie information:" << endl;
     for (int i=0; i<zombies_.size(); i+=1)
     {
-        cout << "[" << i << "] Damage: " << zombies_[i]->getAttack() << " HP:";
-        zombies_[i]->display();
+        cout << "[" << i << "] Damage: " << zombies_[i].getAttack() << " HP:";
+        zombies_[i].display();
         cout << endl;
     }
 }
@@ -229,8 +233,8 @@ void Game::ZombieAction()
 {
     for (int i=0; i<zombies_.size(); i+=1)
     {
-
-        int ZcurrentPos = zombies_[i]->getPos();
+        int ZcurrentPos = zombies_[i].getPos();
+        zombies_[i].setPos((ZcurrentPos+Move(Zombie::step_))%numOfLand_);
         int ZPos = (ZcurrentPos+Move(Zombie::step_))%numOfLand_;
         zombies_[i]->setPos(ZPos);
         
@@ -242,11 +246,10 @@ void Game::ZombieAction()
         system("pause");
         system("cls");
         
-        if(map_[zombies_[i]->getPos()].getStood() && ! map_[zombies_[i]->getPos()].getPlant()->beAttacked(*zombies_[i]) )
         {
-            map_[zombies_[i]->getPos()].recycle();
+            map_[zombies_[i].getPos()].recycle();
         }
-        if (zombies_[i]->isDied())
+        if (zombies_[i].isDied())
         {
             zombies_.erase(zombies_.begin()+i);
         }
