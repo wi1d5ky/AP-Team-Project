@@ -123,7 +123,7 @@ void Game::DisplayMap()const
             cout << " ";
         }
 
-        for (int j=0; j<remainZombie_; j+=1)
+        for (int j=0; j<zombies_.size(); j+=1)
         {
             if (zombies_[j]->getPos() == i)
             {
@@ -150,7 +150,7 @@ void Game::DisplayMap()const
 void Game::DisplayZombieInfo()const
 {
     cout << "Zombie information:" << endl;
-    for (int i=0; i<numOfZombie_; i+=1)
+    for (int i=0; i<zombies_.size(); i+=1)
     {
         cout << "[" << i << "] Damage: " << zombies_[i]->getAttack() << " HP:";
         zombies_[i]->display();
@@ -230,4 +230,23 @@ void Game::PlantAction()
     }
 }
 
-//void ZombieAction();
+void Game::ZombieAction()
+{
+
+    for (int i=0; i<zombies_.size(); i+=1)
+    {
+        
+        int ZcurrentPos = zombies_[i]->getPos();
+        zombies_[i]->setPos((ZcurrentPos+Move(3))%numOfLand_);
+        if(map_[zombies_[i]->getPos()].getStood() && ! map_[zombies_[i]->getPos()].getPlant()->beAttacked(*zombies_[i]) )
+        {
+            map_[zombies_[i]->getPos()].recycle();
+        }
+        if (zombies_[i]->getHP()<=0)
+        {
+            zombies_.erase(zombies_.begin()+i);
+        }
+        
+    }
+    
+}
