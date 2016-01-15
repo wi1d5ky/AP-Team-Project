@@ -27,11 +27,11 @@ void Wait()
 
 void Clear()
 {
-//    for (int i=0; i<50; i++)
-//    {
-//        cout << endl;
-//    }
-    system("cls");
+#ifdef _WIN32
+    system( "cls" ) ;
+#else
+    system( "clear" ) ;
+#endif
 }
 
 void DisplayRule()
