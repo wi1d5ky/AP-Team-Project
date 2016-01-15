@@ -9,8 +9,6 @@ class Zombie
 	public:
 		Zombie(int pos):position_(pos) {}
 
-		int getFullHP() { return full_hp_; }
-		int getHP() { return hp_; }
 		int getPos()const { return position_; }
         int getAttack()const { return power_; }
 		void setPos(int i) { position_ = i; }
@@ -28,11 +26,14 @@ class Zombie
             return *this ;
 		}
 
+        constexpr static int step_ = 4 ;
+
 	private:
 		int position_;
 		int hp_ = full_hp_;
 		constexpr static int power_ = 15;
 		constexpr static int full_hp_ = 40;
+
 };
 
 #endif // ZOMBIE_H

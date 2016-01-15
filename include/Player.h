@@ -23,10 +23,13 @@ class Player
             return *this ;
 		}
 
+		constexpr static int step_ = 6 ;
+
 	private:
 		constexpr static int default_money = 150;
 		int money_ = default_money;
 		int position_ = 0;
+
 };
 
 #endif // PLAYER_H

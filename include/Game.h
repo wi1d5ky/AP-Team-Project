@@ -34,23 +34,17 @@ private:
 
     int min_price_ = INT32_MAX;
     int numOfDeadBomb_ = 0;
-    int numOfZombie_ = 3;
-    int numOfLand_ = 8;
+    int numOfZombie_ ;
+    int numOfLand_ ;
     int remainZombie_ = numOfZombie_;
-
-    int lastmove_ = 4;
+    int RandPos( int range )const;
+    std::vector<Plant*> getPlantList() ;
 
     Player player_;
     Map map_;
     std::vector<Zombie*> zombies_;
     std::vector<Plant*> plantTypes_;
 
-    int Choice(std::string input);
-    void MinPriceOfPlant();
-    bool EnoughMoney(){return player_.currentMoney() > min_price_;}
-    int RandZombiePos()const;
-    std::vector<Plant*> getPlantList() ;
-    Plant* prototype( int idx ) ;
 };
 
 #endif // GAME_H
