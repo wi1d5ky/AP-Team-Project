@@ -177,7 +177,7 @@ void Game::PlayerAction()
     string tmp;
     getline(cin,tmp);
     int choice = atoi(tmp.c_str());
-    if (choice < 0 || choice > plantTypes_.size() ) choice = lastmove_ ;
+    if ( choice < 0 || choice > plantTypes_.size() || !tmp.size() ) choice = lastmove_ ;
     else lastmove_ = choice ;
 
     if (choice == plantTypes_.size() )
@@ -229,7 +229,7 @@ void Game::ZombieAction()
 {
     for (int i=0; i<zombies_.size(); i+=1)
     {
-        
+
         int ZcurrentPos = zombies_[i]->getPos();
         zombies_[i]->setPos((ZcurrentPos+Move(Zombie::step_))%numOfLand_);
         if(map_[zombies_[i]->getPos()].getStood() && ! map_[zombies_[i]->getPos()].getPlant()->beAttacked(*zombies_[i]) )
