@@ -12,8 +12,6 @@ public:
     Game(int numOfLand , int numOfZombie );
     ~Game() ;
 
-    constexpr static int maxZombie = 10 ;
-    constexpr static int maxLand = 10 ;
     constexpr static int defaultZombie = 3 ;
     constexpr static int defaultLand = 8 ;
 
@@ -21,27 +19,24 @@ public:
     void DisplayMap()const;
     void DisplayZombieInfo()const;
 
-    bool InitPlants();
-
     void PlayerAction();
-    void PlantAction();
     void ZombieAction();
 
     int Move(int max);
     void NextStep();
     bool isWin();
     bool isLose();
-
+    bool deadTooMany();
 
 private:
 
     int min_price_ = INT32_MAX;
-    int numOfDeadBomb_ = 0;
-    int numOfZombie_ ;
-    int numOfLand_ ;
+    int numofdeadbomb_ = 0;
+    int numofzombie_ ;
+    int numofland_ ;
 
+    bool InitPlants();
     int RandPos( int range )const;
-    std::vector<Plant*> getPlantList() ;
 
     Player player_;
     Map map_;

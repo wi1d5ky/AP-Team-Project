@@ -9,7 +9,7 @@ class Land
 {
 	public:
 		~Land();
-		bool put( Plant* plant);
+		bool put( Plant* plant );
 		bool getStood()const{return isStood_;}
 		Plant * getPlant() { return plant_; }
 		const Plant * getPlant() const { return plant_; }
@@ -25,16 +25,19 @@ class Map
 {
 	public:
 		// with this constructor, you could get a map with [land_num] empty land
-		Map(int land_num);
+		Map(int landnum);
 
 		Land & operator[] (int i) { return lands_[i]; }
 		const Land & operator[] (int i) const { return lands_[i]; }
 
-		size_t size() { return lands_.size(); }
+		size_t size() { return landnum_; }
 		bool put( Plant* plant, int position) { return lands_[position].put(plant); }
+        std::vector<Plant*> getPlantList() ;
+
+        constexpr static int maxLand = 10;
 
 	private:
-		constexpr static int max_land_num = 10;
+		int landnum_ ;
 		std::vector<Land> lands_;
 };
 

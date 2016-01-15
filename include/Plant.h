@@ -13,6 +13,9 @@ public:
     Plant()=default;
     Plant( const std::string& name, int cost, int fullhp );
 
+    int getFullhp() const{
+        return fullhp_ ;
+    }
     int gethp() const{
         return hp_;
     }

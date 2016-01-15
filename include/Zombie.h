@@ -28,6 +28,7 @@ class Zombie
 		}
 
         constexpr static int step_ = 4 ;
+        constexpr static int maxZombie = 10 ;
 
 	private:
 		int position_;

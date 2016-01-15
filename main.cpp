@@ -39,16 +39,6 @@ void DisplayRule()
     Clear();
 }
 
-void DisplayWin(){
-    cout << endl << endl << endl << "Congratulations! You have killed all zombies!" << endl;
-    Wait();
-}
-
-void DisplayLose(){
-    cout << endl << endl << endl << "Oh no... You have no plant on the map ...." << endl;
-    Wait();     //You lose the game since you cannot use that many bomb plants!
-}
-
 int main()
 {
     srand(time(NULL));
@@ -56,7 +46,7 @@ int main()
     cout << "-----------------------------" << endl
          << "|     Plants vs. Zombies     |" << endl
          << "-----------------------------" << endl ;
-    cout << "Number of lands on the map (1-10, default:8)...>";
+    cout << "Number of lands on the map (1-" << Map::maxLand << ", default:" << Game::defaultLand << ")...>";
 
     char c ;
     int zombienum = 0 , landnum = 0 ;
@@ -66,13 +56,12 @@ int main()
     }
     if( !landnum ) landnum = Game::defaultLand ;
 
-    cout << "Number of zombies on the map (1-10, default:3)...>";
+    cout << "Number of zombies on the map (1-" << Zombie::maxZombie << ", default:" << Game::defaultZombie << ")...>";
     while( c = getchar() , c != '\n' ) {
         zombienum *= 10 ;
         zombienum += (c-'0') ;
     }
     if( !zombienum ) zombienum = Game::defaultZombie ;
-
 
     Game game(landnum,zombienum);
     DisplayRule();
@@ -87,26 +76,23 @@ int main()
         cout << endl;
         game.PlayerAction();
         Wait();
-        if( game.isLose() ) break ;
+        if( game.isLose() || game.deadTooMany() ) break ;
         Clear();
-
         game.ZombieAction();
-
-        //Wait();
         Clear();
-
         game.NextStep();
 
     }while( !game.isLose() && !game.isWin() ) ;
 
-    if(game.isWin())
-        DisplayWin();
-    if (game.isLose())
-    {
-        DisplayLose();
-    }
+    Clear() ;
+    if( game.deadTooMany() )
+        cout << endl << endl << endl << "You lose the game since you cannot use that many bomb plants!" << endl;
+    else if(game.isWin())
+        cout << endl << endl << endl << "Congratulations! You have killed all zombies!" << endl;
+    else if(game.isLose())
+        cout << endl << endl << endl << "Oh no... You have no plant on the map ...." << endl;
 
-
+    Wait();
 	return 0;
 }
 

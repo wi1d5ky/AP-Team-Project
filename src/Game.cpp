@@ -5,11 +5,13 @@
 
 using namespace std;
 
-Game::Game(int numOfLand , int numOfZombie )
-        :map_(numOfLand),numOfZombie_(numOfZombie), numOfLand_(numOfLand) , player_( RandPos(numOfLand) )
+Game::Game(int numofland , int numofzombie )
+        :map_(numofland),numofzombie_(numofzombie), numofland_(numofland) ,player_( RandPos(numofland) )
 {
-    for (int i=0; i<numOfZombie_; i+=1){
-        zombies_.push_back(Zombie(RandPos(numOfLand),i));
+    if( numofzombie_ > Zombie::maxZombie ) numofzombie_ = Zombie::maxZombie ;
+
+    for (int i=0; i<numofzombie_; i+=1){
+        zombies_.push_back(Zombie(RandPos(numofland),i));
     }
     InitPlants() ;
 }
@@ -35,7 +37,6 @@ bool Game::InitPlants() // process file plants.txt
         int cost = 0;
         int fullHP = 0;
 
-        //getline(f,input);
         f >> input;
 
         if (input == "C")//coin plant
@@ -105,7 +106,7 @@ int Game::RandPos( int range )const
 
 void Game::DisplayMap()const
 {
-    for (int i=0; i<numOfLand_; i+=1)
+    for (int i=0; i<numofland_; i+=1)
     {
         cout << "[" << i << "]{" ;
         if (player_.getPos() == i)
@@ -164,7 +165,8 @@ void Game::PlayerAction()
 
     if (map_[player_.getPos()].getStood())
     {
-        map_[player_.getPos()].getPlant()->doThing( player_ , getPlantList() );
+        if( map_[player_.getPos()].getPlant()->doThing(player_,map_.getPlantList()) == 0)
+                cout << "You have get coin!" << endl;
     }
     if ( player_.currentMoney() < min_price_ )
     {
@@ -176,7 +178,8 @@ void Game::PlayerAction()
         cout << "Already planted!" << endl;
         return;
     }
-    cout << "Player $" << player_.currentMoney() << ":    Enter your choice (4 to give up, default: " << lastmove_ << ")...>";
+    cout << "Player $" << player_.currentMoney() << ":    Enter your choice (" << plantTypes_.size()
+                                                        << " to give up, default: " << lastmove_ << ")...>";
 
     string tmp;
     getline(cin,tmp);
@@ -184,50 +187,18 @@ void Game::PlayerAction()
     if ( choice < 0 || choice > plantTypes_.size() || !tmp.size() ) choice = lastmove_ ;
     else lastmove_ = choice ;
 
-    if (choice == plantTypes_.size() )
-    {
+    if (choice == plantTypes_.size() ){
         cout << "You give up!" << endl;
-        return;
     }
-
-    //Plant *newPlant = new Plant(*plantTypes_[choice]);
-    //plantlist_.push_back(newPlant);
-
-    if(map_.put( plantTypes_[choice]->clone() , player_.getPos()) )// bool
-    {
+    else if( map_.put( plantTypes_[choice]->clone() , player_.getPos()) ){
         player_ -= plantTypes_[choice]->getCost();
         cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
     }
 }
 
-vector<Plant*> Game::getPlantList()
-{
-    vector<Plant*> plantlist ;
-
-    for( int i = 0 ; i < numOfLand_ ; i+=1 )
-    {
-        if( map_[i].getPlant() != nullptr )
-            plantlist.push_back(map_[i].getPlant()) ;
-    }
-    return plantlist ;
-}
-
-void Game::NextStep()
-{
+void Game::NextStep(){
     size_t currentPos = player_.getPos();
-    player_.setPos((Move(Player::step_)+currentPos)%numOfLand_);
-}
-
-void Game::PlantAction()
-{
-    for (int i=0; i<numOfLand_; i+=1)
-    {
-        if (map_[i].getStood())
-        {
-            if(map_[i].getPlant()->doThing(player_,getPlantList()) == 0)
-                cout << "You have get coin!" << endl;
-        }
-    }
+    player_.setPos((Move(Player::step_)+currentPos)%numofland_);
 }
 
 void Game::ZombieAction()
@@ -235,8 +206,8 @@ void Game::ZombieAction()
     for (int i=0; i<zombies_.size(); i+=1)
     {
         int ZcurrentPos = zombies_[i].getPos();
-        zombies_[i].setPos((ZcurrentPos+Move(Zombie::step_))%numOfLand_);
-        int ZPos = (ZcurrentPos+Move(Zombie::step_))%numOfLand_;
+        zombies_[i].setPos((ZcurrentPos+Move(Zombie::step_))%numofland_);
+        int ZPos = (ZcurrentPos+Move(Zombie::step_))%numofland_;
         zombies_[i].setPos(ZPos);
 
         DisplayMap();
@@ -250,10 +221,10 @@ void Game::ZombieAction()
         {
             int damage = map_[zombies_[i].getPos()].getPlant()->beAttacked(zombies_[i]) ;
 
-            if( damage > 0 )
+            if( damage > 0 ){
                 cout << map_[zombies_[i].getPos()].getPlant()->getName() << " gives "
                                             <<  damage << " damage to the zombie!" << endl ;
-
+            }
             if (zombies_[i].isDied()){
                 cout << "Zombie is killed!" << endl ;
                 zombies_.erase(zombies_.begin()+i);
@@ -262,9 +233,15 @@ void Game::ZombieAction()
                 cout << "Zombie eats plant " << map_[zombies_[i].getPos()].getPlant()->getName()
                                         << " and causes damage "  << zombies_[i].getAttack() << "." << endl ;
             }
+            if( map_[zombies_[i].getPos()].getPlant()->isDied() )
+            {
+                cout << map_[zombies_[i].getPos()].getPlant()->getName() << " is dead!" << endl ;
+                if( damage == map_[zombies_[i].getPos()].getPlant()->getFullhp() )
+                    numofdeadbomb_ += 1 ;
 
+                map_[zombies_[i].getPos()].recycle();
+            }
         }
-        map_[zombies_[i].getPos()].recycle();
 
         system("pause");
         system("cls");
@@ -273,25 +250,15 @@ void Game::ZombieAction()
 
 bool Game::isWin()
 {
-    return (zombies_.size() == 0 && getPlantList().size()>0 && numOfDeadBomb_ <= numOfZombie_) ;
+    return (zombies_.size() == 0 && !isLose() && !deadTooMany() ) ;
 }
 bool Game::isLose()
 {
-    int alivePlant = 0;
-    for (int i=0 ; i< numOfLand_; i+=1)
-    {
-        if ( map_[i].getStood() )
-        {
-            alivePlant++;
-        }
-    }
-    if (!alivePlant)
-    {
-        return true ;
-    }
-
-    return false ;
+    return ( map_.getPlantList().size() == 0 ) ;
 }
-
+bool Game::deadTooMany()
+{
+    return numofdeadbomb_ > numofzombie_/2 ;
+}
 
 

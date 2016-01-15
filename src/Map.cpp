@@ -1,6 +1,7 @@
 #include "Map.h"
 #include <iostream>
 #include<assert.h>
+using namespace std ;
 
 bool Land::put( Plant* plant)
 {
@@ -27,16 +28,28 @@ void Land::recycle()
     this->~Land();
 }
 
-Map::Map(int land_num)
+Map::Map(int landnum):landnum_(landnum)
 {
-	if(!(land_num > 0 && land_num <= max_land_num))
-		throw "Number of Land should less than " + max_land_num;
-
-    Land tmp;
-	for(int i = 0 ; i < land_num ; ++i)
+	if(!(landnum > 0 && landnum <= maxLand)){
+        landnum_ = maxLand ;
+		throw "Number of Land should less than " + maxLand ;
+	}
+	for(int i = 0 ; i < landnum_ ; ++i)
 	{
 		lands_.push_back(Land());
 	}
 
 }
 
+
+vector<Plant*> Map::getPlantList()
+{
+    vector<Plant*> plantlist ;
+
+    for( int i = 0 ; i < landnum_ ; i+=1 )
+    {
+        if( lands_[i].getPlant() != nullptr )
+            plantlist.push_back(lands_[i].getPlant()) ;
+    }
+    return plantlist ;
+}
