@@ -85,12 +85,13 @@ int main()
         game.DisplayOfPlant();
 
         cout << endl;
-        game.PlayerAction();//judge win/lose next line
+        game.PlayerAction();
         Wait();
+        if( game.isLose() ) break ;
         Clear();
 
         game.ZombieAction();
-        
+
         //Wait();
         Clear();
 

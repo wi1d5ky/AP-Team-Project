@@ -9,7 +9,7 @@ Plant::Plant(const std::string& name, int cost, int fullhp)
 	:name_(name),cost_(cost),fullhp_(fullhp),hp_(fullhp){}
 
 /* doThing() return visited time */
-/* beAttacked() return whether plant is alive after attack of zombie */
+/* beAttcked() return point of plant;s attack */
 
 void Plant::display() const {
     cout << name_ << " $" << cost_ << " HP: " << hp_ ;
@@ -49,11 +49,9 @@ int CoinPlant::doThing(Player& py , vector<Plant*> plantlist ) {
 }
 int CoinPlant::beAttacked(Zombie& zb) {
     hp_ -= zb.getAttack() ;
-    if( hp_ <= 0 ){         // Plant is died
-        hp_ = 0 ;
-        return 0 ;
-    }
-    return 1 ;              // Plant is alive
+    if( hp_ <= 0 ) hp_ = 0 ;
+
+    return 0 ;              // unable attack
 }
 Plant* CoinPlant::clone() const{
     Plant* p = new CoinPlant(*this) ;
@@ -72,7 +70,7 @@ int BombPlant::beAttacked(Zombie& zb) {
     hp_ = 0 ;
     zb -= damage_ ;
 
-    return 0 ;              // Always die
+    return damage_ ;              // Always die
 }
 Plant* BombPlant::clone() const{
     Plant* p = new BombPlant(*this) ;
@@ -92,15 +90,15 @@ void HealPlant::display()const{
 
 int HealPlant::doThing(Player& py , vector<Plant*> plantlist) {
     for( auto& plant : plantlist ){
-        if( plant != nullptr )
             *plant += heal_ ;
     }
     return -1 ;
 }
 int HealPlant::beAttacked(Zombie& zb) {
     hp_ -= zb.getAttack() ;
-    if( hp_ <= 0 ) return 0 ;
-    else return 1 ;
+    if( hp_ <= 0 ) hp_ = 0 ;
+
+    return 0 ;  //unable attack
 }
 Plant* HealPlant::clone() const{
     Plant* p = new HealPlant(*this) ;
@@ -118,11 +116,11 @@ void ShotPlant::display()const{
 
 int ShotPlant::beAttacked(Zombie& zb) {
     zb -= damage_ ;
-    if( zb.isDied() ) return 1 ;
 
     hp_ -= zb.getAttack() ;
-    if( hp_ <= 0 ) return 0 ;
-    else return 1 ;
+    if( hp_ <= 0 ) hp_ = 0 ;
+
+    return damage_ ;
 }
 Plant* ShotPlant::clone() const{
     Plant* p = new ShotPlant(*this) ;
