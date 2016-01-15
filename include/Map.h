@@ -7,7 +7,7 @@
 class Land
 {
 	public:
-		//~Land();
+		~Land();
 		bool put( Plant* plant);
 		bool getStood()const{return isStood_;}
 		Plant * getPlant() { return plant_; }

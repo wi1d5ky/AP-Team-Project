@@ -240,7 +240,7 @@ Plant* Game::prototype( int idx )
     {
         ptmp = new HealPlant(*dynamic_cast<HealPlant*>(plantTypes_[idx])) ;
     }
-    return ptmp ;
+    return ptmp;
 }
 
 void Game::NextStep()
