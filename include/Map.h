@@ -31,8 +31,8 @@ class Map
 		// with this constructor, you could get a map with [land_num] empty land
 		Map(int land_num);
 
-		Land operator[] (int i) { return lands_[i]; }
-		const Land operator[] (int i) const { return lands_[i]; }
+		Land & operator[] (int i) { return lands_[i]; }
+		const Land & operator[] (int i) const { return lands_[i]; }
 
 		size_t size() { return lands_.size(); }
 		bool put( Plant* plant, int position) { return lands_[position].put(plant); }

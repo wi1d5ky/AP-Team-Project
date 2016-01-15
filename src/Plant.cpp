@@ -23,7 +23,11 @@ void Plant::displayinfo() const
 }
 int Plant::doThing(Player& py , vector<Plant*> plantlist ) { return -1 ;}     // Player on plant
 int Plant::beAttacked(Zombie& zb) { return 0 ;}  // Zombie on plant
-Plant* Plant::clone() const {};
+Plant* Plant::clone() const
+{
+    Plant* p = new Plant(*this) ;
+    return p ;
+}
 
 CoinPlant::CoinPlant(const std::string& name, int cost, int fullhp, int round, int coin)
     :Plant(name, cost, fullhp) ,round_(round), coin_(coin), visited_(0){}
