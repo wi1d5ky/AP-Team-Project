@@ -194,7 +194,7 @@ void Game::PlayerAction()
     //Plant *newPlant = new Plant(*plantTypes_[choice]);
     //plantlist_.push_back(newPlant);
 
-    if(map_.put( prototype(choice), player_.getPos()) )// bool
+    if(map_.put( plantTypes_[choice]->clone() , player_.getPos()) )// bool
     {
         //player_ -= plantTypes_[choice]->getCost(); //扣錢
         cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
@@ -210,37 +210,6 @@ vector<Plant*> Game::getPlantList()
         plantlist.push_back(map_[i].getPlant()) ;
     }
     return plantlist ;
-}
-
-Plant* Game::prototype( int idx )
-{
-    fstream f("plants.txt");
-
-    string tmp ;
-    for( int i = 0 ; i < idx ; i+=1 )
-        getline(f,tmp);
-    char input ;
-    f >> input ;
-
-    Plant* ptmp ;
-
-    if (input == 'C')//coin plant
-    {
-        ptmp = new CoinPlant( *dynamic_cast<CoinPlant*>(plantTypes_[idx]) );
-    }
-    else if(input == 'S')//horn plant or shoot plant
-    {
-        ptmp = new ShotPlant(*dynamic_cast<ShotPlant*>(plantTypes_[idx])) ;
-    }
-    else if(input == 'B')//bomb plant
-    {
-        ptmp = new BombPlant(*dynamic_cast<BombPlant*>(plantTypes_[idx])) ;
-    }
-    else if(input == 'H')//heal plant
-    {
-        ptmp = new HealPlant(*dynamic_cast<HealPlant*>(plantTypes_[idx])) ;
-    }
-    return ptmp ;
 }
 
 void Game::NextStep()

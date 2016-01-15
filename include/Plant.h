@@ -48,6 +48,7 @@ public:
         return *this ;
     }
 
+    virtual Plant* clone() const ;
     virtual void display() const ;
     virtual void displayinfo() const;
     virtual int doThing(Player& py , std::vector<Plant*> plantlist) ;     // Player on plant
@@ -77,6 +78,7 @@ public:
         return *this ;
     }
 
+    virtual Plant* clone() const;
     virtual void display()const ;
     virtual void displayinfo()const;
     virtual int doThing(Player& py , std::vector<Plant*> plantlist) ;
@@ -103,6 +105,7 @@ public:
         return *this ;
     }
 
+    virtual Plant* clone() const;
     virtual void display()const ;
     virtual int beAttacked(Zombie& zb) ;
 
@@ -125,6 +128,7 @@ public:
         return *this ;
     }
 
+    virtual Plant* clone() const;
     virtual void display()const ;
     virtual int doThing(Player& py , std::vector<Plant*> plantlist) ;
     virtual int beAttacked(Zombie& zb) ;
@@ -148,6 +152,7 @@ public:
         return *this ;
     }
 
+    virtual Plant* clone() const;
     virtual void display()const ;
     virtual int beAttacked(Zombie& zb) ;
 
