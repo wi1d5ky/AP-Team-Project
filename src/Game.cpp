@@ -247,12 +247,20 @@ void Game::ZombieAction()
 void Game::WinOrLose()
 {
     int numdeadZombie=0;
+    int numdeadPlant=0;
     for(int i=0;i<zombies_.size();i++)
     {
-        if(zombies_[i]->getHP()==0)
+        if(zombies_[i]->isDied())
             numdeadZombie++;
     }
     if(numdeadZombie==zombies_.size())
         win_=true;
+    for(int i=0;i<plantTypes_.size();i++)
+    {
+        if(plantTypes_[i]->isDied())
+            numdeadPlant++;
+    }
+    if(numdeadPlant==plantTypes_.size())
+        lose_=true;
 
 }

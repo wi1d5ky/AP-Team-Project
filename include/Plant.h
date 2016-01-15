@@ -39,6 +39,8 @@ public:
         return *this;
     }
 
+    bool isDied(){return hp_<=0;}
+
     virtual Plant* clone() const ;
     virtual void display() const ;
     virtual void displayinfo() const;
