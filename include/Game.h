@@ -28,6 +28,10 @@ public:
 
     int Move(int max);
     void NextStep();
+    bool isWin(){return win_;}
+    bool isLose(){return lose_;}
+    void WinOrLose();
+
 
 
 private:
@@ -39,11 +43,17 @@ private:
     int remainZombie_ = numOfZombie_;
     int RandPos( int range )const;
     std::vector<Plant*> getPlantList() ;
+    bool lose_ = false;
+
 
     Player player_;
     Map map_;
     std::vector<Zombie*> zombies_;
     std::vector<Plant*> plantTypes_;
+
+
+
+
 
 };
 

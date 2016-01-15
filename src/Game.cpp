@@ -191,7 +191,7 @@ void Game::PlayerAction()
 
     if(map_.put( plantTypes_[choice]->clone() , player_.getPos()) )// bool
     {
-        player_ -= plantTypes_[choice]->getCost(); //æ‰£éŒ¢
+        player_ -= plantTypes_[choice]->getCost(); //Œ¢
         cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
     }
 }
@@ -229,6 +229,7 @@ void Game::ZombieAction()
 {
     for (int i=0; i<zombies_.size(); i+=1)
     {
+        
         int ZcurrentPos = zombies_[i]->getPos();
         zombies_[i]->setPos((ZcurrentPos+Move(Zombie::step_))%numOfLand_);
         if(map_[zombies_[i]->getPos()].getStood() && ! map_[zombies_[i]->getPos()].getPlant()->beAttacked(*zombies_[i]) )
@@ -241,4 +242,17 @@ void Game::ZombieAction()
         }
 
     }
+}
+
+void Game::WinOrLose()
+{
+    int numdeadZombie=0;
+    for(int i=0;i<zombies_.size();i++)
+    {
+        if(zombies_[i]->getHP()==0)
+            numdeadZombie++;
+    }
+    if(numdeadZombie==zombies_.size())
+        win_=true;
+
 }
