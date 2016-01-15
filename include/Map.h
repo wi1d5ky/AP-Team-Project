@@ -1,8 +1,9 @@
-#ifndef LAND_H
-#define LAND_H
+#ifndef MAP_H
+#define MAP_H
 
 #include <string>
 #include "Plant.h"
+#include <vector>
 
 class Land
 {
@@ -19,12 +20,6 @@ class Land
 		bool isStood_ = false;
 };
 
-#endif // LAND_H
-
-#ifndef MAP_H
-#define MAP_H
-
-#include <vector>
 
 class Map
 {

@@ -194,11 +194,18 @@ void Game::PlayerAction()
     //Plant *newPlant = new Plant(*plantTypes_[choice]);
     //plantlist_.push_back(newPlant);
 
+<<<<<<< Updated upstream
     if(map_.put( plantTypes_[choice]->clone() , player_.getPos()) )// bool
     {
-        //player_ -= plantTypes_[choice]->getCost(); //Œ¢
+        //player_ -= plantTypes_[choice]->getCost(); //æ‰£éŒ¢
         cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
     }
+=======
+    map_.put( prototype(choice), player_.getPos()); // bool
+    cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
+
+
+>>>>>>> Stashed changes
 }
 
 vector<Plant*> Game::getPlantList()
