@@ -17,6 +17,7 @@ Land::~Land()
 	if(plant_ != nullptr)
 	{
         delete plant_;
+        plant_ = 0 ;
         isStood_ = false;
 	}
 }

@@ -8,9 +8,6 @@ using namespace std ;
 Plant::Plant(const std::string& name, int cost, int fullhp)
 	:name_(name),cost_(cost),fullhp_(fullhp),hp_(fullhp){}
 
-//Copy Constructor
-Plant::Plant(const Plant &plant):name_(plant.name_),cost_(plant.cost_),fullhp_(plant.fullhp_),hp_(plant.hp_){}
-
 /* doThing() return heal point */
 /* beAttacked() return whether plant is alive after attack of zombie */
 
@@ -32,7 +29,6 @@ Plant* Plant::clone() const
 CoinPlant::CoinPlant(const std::string& name, int cost, int fullhp, int round, int coin)
     :Plant(name, cost, fullhp) ,round_(round), coin_(coin), visited_(0){}
 
-CoinPlant::CoinPlant(const CoinPlant &coinplant):Plant(coinplant),round_(coinplant.round_),coin_(coinplant.coin_),visited_(coinplant.visited_){}
 
 void CoinPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
@@ -66,8 +62,6 @@ Plant* CoinPlant::clone() const{
 
 BombPlant::BombPlant(const std::string& name, int cost, int fullhp )
     :Plant(name, cost, fullhp), damage_(fullhp){}
-
-BombPlant::BombPlant(const BombPlant &bombplant):Plant(bombplant),damage_(bombplant.damage_){}
 
 void BombPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
@@ -115,8 +109,6 @@ Plant* HealPlant::clone() const{
 
 ShotPlant::ShotPlant(const std::string& name, int cost, int fullhp, int damage)
 	:Plant(name, cost, fullhp),damage_(damage){}
-
-ShotPlant::ShotPlant(const ShotPlant &shotplant):Plant(shotplant),damage_(shotplant.damage_){}
 
 void ShotPlant::display()const{
 	cout << name_ << " $" << cost_ << " HP: " << hp_
