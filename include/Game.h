@@ -28,6 +28,10 @@ public:
 
     int Move(int max);
     void NextStep();
+    bool isWin(){return win_;}
+    bool isLose(){return lose_;}
+    void WinOrLose();
+
 
 
 private:
@@ -37,6 +41,9 @@ private:
     int numOfZombie_ = 3;
     int numOfLand_ = 8;
     int remainZombie_ = numOfZombie_;
+
+    bool win_ = false;
+    bool lose_ = false;
 
     int lastmove_ = 4;
 
@@ -51,6 +58,10 @@ private:
     int RandZombiePos()const;
     std::vector<Plant*> getPlantList() ;
     Plant* prototype( int idx ) ;
+
+
+
+
 };
 
 #endif // GAME_H

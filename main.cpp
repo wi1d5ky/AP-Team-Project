@@ -91,7 +91,7 @@ int main()
     DisplayRule();
 
 
-    while(true)
+    while(game.isLose()==false&&game.isWin()==false)
     {
         game.DisplayMap();
         DisplayBar();
@@ -103,14 +103,17 @@ int main()
         game.PlayerAction();
         Wait();
         Clear();
-        
+
         game.ZombieAction();
-        
+
         game.NextStep();
+        game.WinOrLose();
     }
+    if(game.isWin()==true)
+        DisplayWin();
 
 
-    
+
 
 	return 0;
 }
