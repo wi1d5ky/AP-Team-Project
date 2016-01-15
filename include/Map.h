@@ -12,6 +12,7 @@ class Land
 		bool getStood()const{return isStood_;}
 		Plant * getPlant() { return plant_; }
 		const Plant * getPlant() const { return plant_; }
+        void recycle();
 
 	private:
 		Plant * plant_ = nullptr;

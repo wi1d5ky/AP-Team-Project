@@ -14,12 +14,17 @@ bool Land::put( Plant* plant)
 
 Land::~Land()
 {
-	if(plant_ != nullptr)
-	{
+    recycle();
+}
+
+void Land::recycle()
+{
+    if(plant_ != nullptr)
+    {
         delete plant_;
         plant_ = 0 ;
         isStood_ = false;
-	}
+    }
 }
 
 Map::Map(int land_num)
