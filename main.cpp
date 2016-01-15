@@ -108,10 +108,14 @@ int main()
 
         game.NextStep();
         game.WinOrLose();
-    }while( !game.isLose() || !game.isWin() ) ;
+    }while( !game.isLose() && !game.isWin() ) ;
 
     if(game.isWin())
         DisplayWin();
+    if (game.isLose())
+    {
+        DisplayLose();
+    }
 
 
 

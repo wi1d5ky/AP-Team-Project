@@ -246,6 +246,26 @@ void Game::ZombieAction()
 
 void Game::WinOrLose()
 {
+    int alivePlant = 0;
+    for (int i=0 ; i< numOfLand_; i+=1)
+    {
+        if ( map_[i].getStood() )
+        {
+            alivePlant++;
+        }
+    }
+    if (alivePlant == 0)
+    {
+        lose_ = true;
+    }
+    if (zombies_.size() == 0 && getPlantList().size()>0 && numOfDeadBomb_ <= numOfZombie_)
+    {
+        win_ = true;
+    }
+    
+    
+    
+    /*
     int numdeadZombie=0;
     int numdeadPlant=0;
     for(int i=0;i<zombies_.size();i++)
@@ -262,5 +282,5 @@ void Game::WinOrLose()
     }
     if(numdeadPlant==plantTypes_.size())
         lose_=true;
-
+     */
 }
