@@ -12,6 +12,15 @@ bool Land::put( Plant* plant)
 	return true;
 }
 
+Land::~Land()
+{
+	if(plant_ != nullptr)
+	{
+        delete plant_;
+        isStood_ = false;
+	}
+}
+
 Map::Map(int land_num)
 {
 	if(!(land_num > 0 && land_num <= max_land_num))
