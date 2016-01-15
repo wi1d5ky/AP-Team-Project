@@ -103,6 +103,7 @@ int main()
         game.PlayerAction();
         Wait();
         Clear();
+        game.NextStep();
     }
 
 

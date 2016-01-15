@@ -161,7 +161,7 @@ void Game::DisplayZombieInfo()const
 int Game::Move(int max)
 {
     int move = rand()%max;
-    return move;
+    return move+1;
 }
 
 void Game::PlayerAction()
@@ -191,7 +191,6 @@ void Game::PlayerAction()
 
     map_.put( prototype(choice), player_.getPos()); // bool
     cout << "You have planted " << plantTypes_[choice]->getName() << " at land " << player_.getPos() << " !" << endl;
-
 }
 
 vector<Plant*> Game::getPlantList()
@@ -236,3 +235,8 @@ Plant* Game::prototype( int idx )
     return ptmp ;
 }
 
+void Game::NextStep()
+{
+    size_t currentPos = player_.getPos();
+    player_.setPos((Move(6)+currentPos)%numOfLand_);
+}

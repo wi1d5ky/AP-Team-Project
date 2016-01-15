@@ -27,6 +27,7 @@ public:
     void ZombieAction();
 
     int Move(int max);
+    void NextStep();
 
 
 private:
